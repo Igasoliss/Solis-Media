@@ -204,12 +204,19 @@ body{margin:0;background:#fff;font-family:'Poppins',sans-serif}
 .sm-pbody h3{font-size:clamp(1.7rem,3vw,2.2rem);font-weight:800;line-height:1.1;margin:0;color:var(--ink)}
 .sm-role{font-weight:500;color:var(--ink)!important;font-size:.95rem}
 .sm-pbody p{color:var(--text);margin:0}
-.sm-colleagues{background:var(--lima);color:var(--ink);border-radius:26px;padding:clamp(26px,4vw,44px);margin-top:22px;display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-.sm-colltext{max-width:640px;display:flex;flex-direction:column;gap:10px}
-.sm-colleagues h3{font-size:clamp(1.4rem,2.6vw,1.9rem);font-weight:800;margin:0;color:var(--ink)}
-.sm-colleagues p{color:var(--ink);margin:0}
-.sm-colleagues .wp-block-button__link{background:var(--ink);color:var(--lima);border-color:var(--ink)}
-.sm-colleagues .wp-block-button__link:hover{opacity:.88}
+
+/* Ideal para */
+.sm-lead{max-width:640px}
+.sm-idgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:8px}
+.sm-idcard{background:#fff;border:1px solid #e3e3dc;border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:8px}
+.sm-idico{width:48px;height:48px;border-radius:14px;background:var(--lima);display:flex;align-items:center;justify-content:center;margin-bottom:6px}
+.sm-idico .wp-block-html,.sm-idico svg{display:block}
+.sm-idcard h3{font-size:1.05rem;font-weight:600;line-height:1.25;margin:0}
+.sm-idcard p{font-size:.92rem;color:var(--text);margin:0}
+.sm-idfoot{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:12px}
+.sm-idfoot p{font-weight:500;margin:0}
+@media (max-width:1100px){.sm-idgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.sm-idgrid{gap:12px}.sm-idcard{padding:18px}.sm-idcard h3{font-size:.98rem}.sm-idcard p{font-size:.85rem}}
 
 </style>
 </head>
@@ -332,6 +339,74 @@ body{margin:0;background:#fff;font-family:'Poppins',sans-serif}
 </div>
 </div>
 </div>
+<div class="wp-block-group sm-sec sm-soft-bg sm-ideal">
+<h2 class="wp-block-heading">Esto es <em>ideal para ti</em> si...</h2>
+<p class="sm-lead">Trabajamos con negocios y profesionales de distintos rubros. Estos son algunos de los que más nos buscan.</p>
+<div class="wp-block-group sm-idgrid">
+<div class="wp-block-group sm-idcard">
+<div class="wp-block-group sm-idico">
+<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#1A1217" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l1 13H5L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+</div>
+<h3 class="wp-block-heading">Tienes una tienda online</h3>
+<p>Si vendes productos, armamos tu tienda y las campañas para que te encuentren.</p>
+</div>
+<div class="wp-block-group sm-idcard">
+<div class="wp-block-group sm-idico">
+<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#1A1217" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>
+</div>
+<h3 class="wp-block-heading">Eres profesional de la salud</h3>
+<p>Matronas, psicólogos, nutricionistas y más: muestra tu trabajo y recibe consultas.</p>
+</div>
+<div class="wp-block-group sm-idcard">
+<div class="wp-block-group sm-idico">
+<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#1A1217" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><path d="M5 7h14"/><path d="M5 7l-3 7a3 3 0 0 0 6 0L5 7z"/><path d="M19 7l-3 7a3 3 0 0 0 6 0l-3-7z"/><path d="M8 21h8"/></svg>
+</div>
+<h3 class="wp-block-heading">Eres abogado o asesor</h3>
+<p>Un sitio que transmite confianza y capta consultas.</p>
+</div>
+<div class="wp-block-group sm-idcard">
+<div class="wp-block-group sm-idico">
+<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#1A1217" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+</div>
+<h3 class="wp-block-heading">Quieres una marca personal</h3>
+<p>Para que te conozcan, te recuerden y te elijan.</p>
+</div>
+<div class="wp-block-group sm-idcard">
+<div class="wp-block-group sm-idico">
+<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#1A1217" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2V5z"/><path d="M8 7h7"/></svg>
+</div>
+<h3 class="wp-block-heading">Das talleres o cursos</h3>
+<p>Una landing con inscripción para llenar tus cupos.</p>
+</div>
+<div class="wp-block-group sm-idcard">
+<div class="wp-block-group sm-idico">
+<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#1A1217" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10v10h16V10"/><path d="M3 10l2-6h14l2 6H3z"/></svg>
+</div>
+<h3 class="wp-block-heading">Tienes un negocio local</h3>
+<p>Que te encuentren en internet y te escriban por WhatsApp.</p>
+</div>
+<div class="wp-block-group sm-idcard">
+<div class="wp-block-group sm-idico">
+<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#1A1217" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V4"/><path d="M4 20h16"/><path d="M8 15l4-4 3 3 5-6"/></svg>
+</div>
+<h3 class="wp-block-heading">Tu web no vende lo que podría</h3>
+<p>La optimizamos y automatizamos las respuestas.</p>
+</div>
+<div class="wp-block-group sm-idcard">
+<div class="wp-block-group sm-idico">
+<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#1A1217" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="14" height="10" rx="2"/><path d="m17 11 4-2v6l-4-2"/></svg>
+</div>
+<h3 class="wp-block-heading">Necesitas contenido</h3>
+<p>Videos y piezas para redes, listos para publicar.</p>
+</div>
+</div>
+<div class="wp-block-group sm-idfoot">
+<p>¿No ves tu rubro? Escríbenos y lo conversamos.</p>
+<div class="wp-block-buttons">
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://wa.me/56953241997">Escríbenos por WhatsApp</a></div>
+</div>
+</div>
+</div>
 <div id="nosotros" class="wp-block-group sm-sec sm-dark sm-team">
 <p class="sm-k">EL EQUIPO</p>
 <h2 class="wp-block-heading">Detrás de Solís Media <em>estamos nosotros</em></h2>
@@ -360,15 +435,6 @@ body{margin:0;background:#fff;font-family:'Poppins',sans-serif}
 <li>Edición de video</li>
 </ul>
 </div>
-</div>
-</div>
-<div class="wp-block-group sm-colleagues">
-<div class="wp-block-group sm-colltext">
-<h3 class="wp-block-heading">¿Eres matrona o profesional de la salud?</h3>
-<p>Katy es matrona y entiende tu trabajo. Te ayudamos a mostrarlo con una landing, tus talleres o servicios y una marca personal que genere confianza.</p>
-</div>
-<div class="wp-block-buttons">
-<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://wa.me/56953241997?text=Hola%2C%20soy%20matrona%20o%20profesional%20de%20la%20salud%20y%20quiero%20mostrar%20mi%20trabajo">Escríbenos por WhatsApp</a></div>
 </div>
 </div>
 </div>
