@@ -426,6 +426,11 @@ body{margin:0;background:#fff;font-family:'Poppins',sans-serif}
 .sm-devsec .sm-devs{max-width:720px;margin-top:20px}
 /* Aire entre las dos líneas del título del banner */
 .sm-page .sm-hero-photo .sm-h1 em{display:inline-block;margin-top:.3em;line-height:1.2;padding:.06em .28em}
+/* Los recuadros lima de los títulos no se parten en dos en celular */
+@media(max-width:560px){
+  .sm-page h2 em{display:inline-block;white-space:nowrap;margin-top:.15em}
+  .sm-page .sm-exp h2{font-size:1.55rem;line-height:1.25}
+}
 
 </style>
 </head>
