@@ -6,7 +6,7 @@
 // función de más no duplica nada.
 import { createClient } from "npm:@supabase/supabase-js@2.45.4";
 
-const SITE = "https://igasoliss.github.io/Solis-Media/agenda-eileen/";
+const SITE = "https://solismedia.cl/agenda/eileen/";
 const FROM = "Agenda Matrona Eileen Cartes <agenda@solismedia.cl>";
 const TZ = "America/Santiago";
 const RESEND = Deno.env.get("RESEND_API_KEY") ?? "";
