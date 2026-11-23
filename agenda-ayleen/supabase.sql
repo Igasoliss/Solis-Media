@@ -52,6 +52,12 @@ drop policy if exists admin_bloqueos on public.bloqueos;
 create policy admin_bloqueos on public.bloqueos for all to authenticated
   using (public.es_admin()) with check (public.es_admin());
 
+-- Permisos de tabla (las reglas de arriba siguen filtrando por fila)
+grant usage on schema public to anon, authenticated;
+grant select, insert, update, delete on public.citas, public.bloqueos to authenticated;
+revoke all on public.citas, public.bloqueos, public.administradoras from anon;
+grant execute on function public.es_admin() to authenticated;
+
 -- Lo que ve el público: solo horarios ocupados, sin nombres ni datos personales
 create or replace function public.horarios_ocupados(p_desde date, p_hasta date)
 returns table (fecha date, hora time, minutos int)
