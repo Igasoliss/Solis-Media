@@ -2,7 +2,7 @@
 -- Agenda online · Solis media · opiniones visibles en la página de reservas
 -- Pegar en Supabase > SQL Editor > Run. Se puede re-ejecutar.
 -- Muestra el promedio de TODAS las reseñas y, como testimonios, solo las de
--- 4 o 5 estrellas que tienen comentario. Solo el nombre de pila y la
+-- 4 o 5 estrellas que tienen comentario (las 50 más recientes). Solo el nombre de pila y la
 -- inicial del apellido, nunca correo ni teléfono.
 -- =====================================================================
 create or replace function public.resenas_publicas()
@@ -19,7 +19,7 @@ returns jsonb language sql stable security definer set search_path = public as $
           from resenas s join reservas r on r.id = s.booking_id
          where s.rating >= 4 and coalesce(trim(s.comment), '') <> ''
          order by s.created_at desc
-         limit 6) x), '[]'::jsonb)
+         limit 50) x), '[]'::jsonb)
   );
 $$;
 
