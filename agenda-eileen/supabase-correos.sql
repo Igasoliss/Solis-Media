@@ -58,5 +58,6 @@ select cron.schedule('agenda-correos', '*/15 * * * *', $cron$
   select net.http_post(
     url := 'https://xpwscuxzbojgzoolllto.supabase.co/functions/v1/correos',
     headers := '{"Content-Type":"application/json","apikey":"sb_publishable_sOqXkn77H_IqVfqULZ4jZQ_753H1bnG"}'::jsonb,
-    body := '{"tipo":"programados"}'::jsonb);
+    body := '{"tipo":"programados"}'::jsonb,
+    timeout_milliseconds := 30000);
 $cron$);
