@@ -76,8 +76,8 @@ footer a{color:var(--muted)}
    Todo lo que cambia entre un cliente y otro está aquí.          */
 const CONFIG = {
   // --- Conexión a la base de datos (Supabase). Vacío = modo demo en el navegador.
-  supabaseUrl:  "",
-  supabaseKey:  "",                                  // clave "anon/public" (es pública, no es secreta)
+  supabaseUrl:  "https://xpwscuxzbojgzoolllto.supabase.co",
+  supabaseKey:  "sb_publishable_sOqXkn77H_IqVfqULZ4jZQ_753H1bnG",   // clave pública (publishable), no es secreta
 
   negocio:      "Ayleen · Matrona",                  // nombre que ve la paciente
   bajada:       "Control ginecológico, embarazo y lactancia",
@@ -274,15 +274,15 @@ const StoreLocal = (() => {
 })();
 
 const StoreSupabase = {
-  async login(email, clave){
-    const { error } = await sb.auth.signInWithPassword({ email, password: clave });
-    if (error) return false;
-    const { data: admin } = await sb.rpc("es_admin");                    // ¿está autorizada?
-    if (admin !== true) { await sb.auth.signOut(); return false; }
-    return true;
+  // Acceso sin contraseña: se envía un enlace al correo (solo a usuarias ya creadas en Supabase)
+  async login(email){
+    const { error } = await sb.auth.signInWithOtp({ email,
+      options:{ shouldCreateUser:false, emailRedirectTo: location.origin + location.pathname } });
+    return error ? false : "enlace";
   },
+  async esAdmin(){ const { data } = await sb.rpc("es_admin"); return data === true; },
   async logout(){ await sb.auth.signOut(); },
-  async sesion(){ const { data } = await sb.auth.getSession(); return !!data.session; },
+  async sesion(){ const { data } = await sb.auth.getSession(); return !!data.session && await this.esAdmin(); },
   async ocupados(desde, hasta){
     const { data, error } = await sb.rpc("horarios_ocupados", { p_desde: desde, p_hasta: hasta });
     if (error) throw new Error("No se pudo cargar la agenda. Intenta de nuevo.");
@@ -500,12 +500,22 @@ function entrar(){
 }
 $("#formLogin").addEventListener("submit", async e=>{
   e.preventDefault();
-  if (await Store.login($("#loginEmail").value.trim(), $("#pin").value)) entrar();
-  else $("#errLogin").classList.remove("hidden");
+  const r = await Store.login($("#loginEmail").value.trim(), $("#pin").value);
+  if (r === "enlace") { $("#errLogin").textContent = "Listo. Revisa tu correo y abre el enlace para entrar."; $("#errLogin").style.color = "var(--ok)"; $("#errLogin").classList.remove("hidden"); }
+  else if (r) entrar();
+  else { $("#errLogin").textContent = REMOTO ? "No pudimos enviar el enlace. Revisa el correo o intenta en unos minutos." : "PIN incorrecto."; $("#errLogin").style.color = "var(--bad)"; $("#errLogin").classList.remove("hidden"); }
 });
 $("#btnSalir").onclick = async ()=>{ await Store.logout(); logueado=false; $("#pin").value=""; $("#panel").classList.add("hidden"); $("#cardLogin").classList.remove("hidden"); };
 if (!REMOTO) { $("#loginEmail").classList.add("hidden"); $("#pin").placeholder = "PIN"; $("#pin").inputMode = "numeric"; }
-else { $("#demoNotice").classList.add("hidden"); Store.sesion().then(ok=>{ if(ok && location.hash==="#admin") entrar(); }); }
+else {
+  $("#demoNotice").classList.add("hidden"); $("#pin").classList.add("hidden");
+  $("#formLogin button").textContent = "Enviarme enlace de acceso";
+  // Al volver desde el enlace del correo, entra directo al panel
+  sb.auth.onAuthStateChange(async (evento) => {
+    if (evento === "SIGNED_IN" && !logueado && await Store.sesion()) { if (location.hash !== "#admin") location.hash = "#admin"; entrar(); }
+  });
+  Store.sesion().then(ok=>{ if(ok && location.hash==="#admin" && !logueado) entrar(); });
+}
 
 document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{
   document.querySelectorAll("[data-tab]").forEach(x=>x.classList.toggle("ghost", x!==b));
