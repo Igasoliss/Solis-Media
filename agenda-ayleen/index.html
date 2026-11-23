@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agenda tu hora</title>
+<style>
+/* ============================================================
+   Plantilla de agenda online · Solis media
+   Para adaptarla a otro cliente (barbería, kinesiólogo, etc.)
+   solo edita el objeto CONFIG más abajo.
+   ============================================================ */
+:root{
+  --brand:#8a5a9e; --brand-2:#f3e9f7; --ink:#2b2433; --muted:#6f6679;
+  --bg:#fbf8fc; --card:#ffffff; --line:#e7dfec; --ok:#2e7d5b; --bad:#b3404a;
+  --radius:14px;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
+header{background:var(--brand);color:#fff;padding:22px 16px}
+header .wrap{display:flex;align-items:center;gap:14px}
+header .logo{width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center;font-size:24px;flex:none}
+header h1{margin:0;font-size:1.25rem}
+header p{margin:2px 0 0;opacity:.9;font-size:.93rem}
+.wrap{max-width:860px;margin:0 auto}
+main{padding:20px 16px 60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin-bottom:16px}
+h2{font-size:1.05rem;margin:0 0 12px}
+.step{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--brand);color:#fff;font-size:.8rem;margin-right:8px}
+.muted{color:var(--muted);font-size:.9rem}
+.grid{display:grid;gap:10px}
+.services{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.opt{border:1.5px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;background:#fff;text-align:left;font:inherit;color:inherit}
+.opt:hover{border-color:var(--brand)}
+.opt[aria-pressed=true]{border-color:var(--brand);background:var(--brand-2)}
+.opt b{display:block}
+.days{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x mandatory}
+.day{flex:none;width:64px;text-align:center;padding:8px 4px;scroll-snap-align:start}
+.day small{display:block;color:var(--muted);font-size:.75rem;text-transform:capitalize}
+.day[disabled]{opacity:.35;cursor:not-allowed}
+.slots{grid-template-columns:repeat(auto-fill,minmax(84px,1fr))}
+.slot{text-align:center;padding:10px 4px}
+label{display:block;font-size:.9rem;margin:10px 0 4px;font-weight:600}
+input,textarea,select{width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;font:inherit;background:#fff;color:inherit}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--brand)}
+.check{display:flex;gap:8px;align-items:flex-start;font-weight:400;font-size:.88rem}
+.check input{width:auto;margin-top:3px}
+.btn{display:inline-block;background:var(--brand);color:#fff;border:0;border-radius:10px;padding:12px 18px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--brand);border:1.5px solid var(--brand)}
+.btn.small{padding:6px 10px;font-size:.85rem}
+.btn.danger{background:var(--bad)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+@media (max-width:560px){.two{grid-template-columns:1fr}}
+.summary{background:var(--brand-2);border-radius:10px;padding:12px;margin:12px 0}
+.ok{color:var(--ok)}
+.hidden{display:none!important}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.03em}
+.tag{display:inline-block;padding:2px 8px;border-radius:99px;font-size:.75rem;background:var(--brand-2)}
+.tag.cancelada{background:#f6dfe1;color:var(--bad)}
+.tag.atendida{background:#dff1e8;color:var(--ok)}
+.tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.notice{font-size:.82rem;background:#fff7e0;border:1px solid #f0dca0;border-radius:10px;padding:10px 12px;margin-bottom:16px}
+footer{text-align:center;font-size:.8rem;color:var(--muted);padding:20px}
+footer a{color:var(--muted)}
+.tablewrap{overflow-x:auto}
+</style>
+</head>
+<body>
+
+<script>
+/* ===================== CONFIGURACIÓN DEL CLIENTE =====================
+   Todo lo que cambia entre un cliente y otro está aquí.          */
+const CONFIG = {
+  // --- Conexión a la base de datos (Supabase). Vacío = modo demo en el navegador.
+  supabaseUrl:  "",
+  supabaseKey:  "",                                  // clave "anon/public" (es pública, no es secreta)
+
+  negocio:      "Ayleen · Matrona",                  // nombre que ve la paciente
+  bajada:       "Control ginecológico, embarazo y lactancia",
+  icono:        "🌸",                               // emoji o deja "" para iniciales
+  colorMarca:   "#8a5a9e",
+  colorSuave:   "#f3e9f7",
+  direccion:    "Consulta en Av. Ejemplo 123, of. 45, Santiago",
+  whatsapp:     "56912345678",                       // sin + ni espacios
+  moneda:       "CLP",
+  pinAdmin:     "1234",                              // solo en modo demo; con Supabase se usa correo y contraseña
+  diasAdelante: 30,                                  // cuántos días se pueden reservar
+  anticipacionMinHoras: 3,                           // no permitir reservas con menos de X horas
+  intervaloMin: 15,                                  // cada cuánto se ofrecen horas
+  // Horario semanal: 0=domingo … 6=sábado. Varios bloques por día.
+  horario: {
+    1: [["09:00","13:00"],["15:00","19:00"]],
+    2: [["09:00","13:00"],["15:00","19:00"]],
+    3: [["09:00","13:00"]],
+    4: [["09:00","13:00"],["15:00","19:00"]],
+    5: [["09:00","14:00"]],
+    6: [["10:00","13:00"]]
+  },
+  servicios: [
+    { id:"control-gine",  nombre:"Control ginecológico",        minutos:45, precio:30000, detalle:"Incluye PAP si corresponde" },
+    { id:"control-emb",   nombre:"Control de embarazo",         minutos:45, precio:35000, detalle:"Seguimiento prenatal" },
+    { id:"lactancia",     nombre:"Asesoría de lactancia",       minutos:60, precio:40000, detalle:"Presencial" },
+    { id:"anticoncepcion",nombre:"Consejería anticonceptiva",   minutos:30, precio:25000, detalle:"Incluye receta si corresponde" },
+    { id:"tele",          nombre:"Teleconsulta",                minutos:30, precio:20000, detalle:"Por videollamada" }
+  ],
+  pedirRut: true,
+  textoConsentimiento: "Acepto que mis datos se usen solo para gestionar esta hora y contactarme por ella.",
+  creditos: { texto:"Hecho por Solis media", url:"#" }
+};
+</script>
+
+<header><div class="wrap">
+  <div class="logo" id="logo"></div>
+  <div><h1 id="titulo"></h1><p id="bajada"></p></div>
+</div></header>
+
+<main class="wrap">
+  <div class="notice" id="demoNotice">
+    <b>Versión de demostración:</b> las reservas se guardan solo en este navegador. Antes de usarla con pacientes reales hay que conectarla a una base de datos (ver README).
+  </div>
+
+  <!-- ===================== VISTA PACIENTE ===================== -->
+  <section id="vistaPaciente">
+    <div class="card">
+      <h2><span class="step">1</span>¿Qué atención necesitas?</h2>
+      <div class="grid services" id="listaServicios"></div>
+    </div>
+
+    <div class="card" id="cardFecha">
+      <h2><span class="step">2</span>Elige día y hora</h2>
+      <p class="muted" id="ayudaFecha">Primero elige una atención.</p>
+      <div class="days" id="listaDias"></div>
+      <div class="grid slots" id="listaHoras" style="margin-top:12px"></div>
+    </div>
+
+    <form class="card hidden" id="formDatos" autocomplete="on">
+      <h2><span class="step">3</span>Tus datos</h2>
+      <div class="summary" id="resumen"></div>
+      <div class="two">
+        <div><label for="fNombre">Nombre y apellido</label><input id="fNombre" name="name" required maxlength="80"></div>
+        <div id="wrapRut"><label for="fRut">RUT</label><input id="fRut" name="rut" placeholder="12.345.678-9" maxlength="12"></div>
+        <div><label for="fTel">Teléfono (WhatsApp)</label><input id="fTel" name="tel" type="tel" required placeholder="+56 9 1234 5678" maxlength="20"></div>
+        <div><label for="fEmail">Correo</label><input id="fEmail" name="email" type="email" maxlength="80"></div>
+      </div>
+      <label for="fNota">Comentario (opcional)</label>
+      <textarea id="fNota" rows="2" maxlength="300" placeholder="No incluyas información médica sensible aquí."></textarea>
+      <label class="check"><input type="checkbox" id="fConsent" required><span id="txtConsent"></span></label>
+      <p class="muted hidden" id="errForm" style="color:var(--bad)"></p>
+      <div class="row" style="margin-top:12px"><button class="btn" type="submit">Confirmar hora</button></div>
+    </form>
+
+    <div class="card hidden" id="cardOk">
+      <h2 class="ok">✓ ¡Hora reservada!</h2>
+      <div class="summary" id="resumenOk"></div>
+      <p class="muted" id="dirOk"></p>
+      <div class="row">
+        <a class="btn" id="btnWsp" target="_blank" rel="noopener">Avisar por WhatsApp</a>
+        <button class="btn ghost" id="btnIcs" type="button">Agregar a mi calendario</button>
+        <button class="btn ghost" id="btnOtra" type="button">Agendar otra hora</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== VISTA PROFESIONAL ===================== -->
+  <section id="vistaAdmin" class="hidden">
+    <div class="card" id="cardLogin">
+      <h2>Acceso profesional</h2>
+      <form id="formLogin" class="row">
+        <input id="loginEmail" type="email" placeholder="Correo" style="max-width:240px" autocomplete="username">
+        <input id="pin" type="password" placeholder="Contraseña" style="max-width:200px" autocomplete="current-password">
+        <button class="btn">Entrar</button>
+      </form>
+      <p class="muted hidden" id="errLogin" style="color:var(--bad)">Datos incorrectos.</p>
+    </div>
+
+    <div id="panel" class="hidden">
+      <div class="tabs">
+        <button class="btn small" data-tab="agenda">Agenda</button>
+        <button class="btn small ghost" data-tab="bloqueos">Bloquear horario</button>
+        <button class="btn small ghost" data-tab="nueva">Agendar manual</button>
+        <button class="btn small ghost" id="btnCsv" type="button">Exportar CSV</button>
+        <button class="btn small ghost" id="btnSalir" type="button">Salir</button>
+      </div>
+
+      <div class="card" data-panel="agenda">
+        <div class="row" style="justify-content:space-between">
+          <h2 style="margin:0">Agenda</h2>
+          <div class="row">
+            <button class="btn small ghost" id="diaPrev" type="button">‹</button>
+            <input type="date" id="diaAdmin" style="width:auto">
+            <button class="btn small ghost" id="diaNext" type="button">›</button>
+            <button class="btn small ghost" id="diaHoy" type="button">Hoy</button>
+          </div>
+        </div>
+        <p class="muted" id="statsDia"></p>
+        <div class="tablewrap"><table>
+          <thead><tr><th>Hora</th><th>Paciente</th><th>Atención</th><th>Estado</th><th></th></tr></thead>
+          <tbody id="tablaAgenda"></tbody>
+        </table></div>
+        <h2 style="margin-top:22px">Próximas horas</h2>
+        <div class="tablewrap"><table>
+          <thead><tr><th>Fecha</th><th>Hora</th><th>Paciente</th><th>Atención</th></tr></thead>
+          <tbody id="tablaProximas"></tbody>
+        </table></div>
+      </div>
+
+      <div class="card hidden" data-panel="bloqueos">
+        <h2>Bloquear horario (vacaciones, trámites, etc.)</h2>
+        <form id="formBloqueo">
+          <div class="two">
+            <div><label for="bFecha">Día</label><input type="date" id="bFecha" required></div>
+            <div><label for="bMotivo">Motivo (solo lo ves tú)</label><input id="bMotivo" maxlength="60"></div>
+            <div><label for="bDesde">Desde</label><input type="time" id="bDesde"></div>
+            <div><label for="bHasta">Hasta</label><input type="time" id="bHasta"></div>
+          </div>
+          <p class="muted">Deja "desde/hasta" vacíos para bloquear el día completo.</p>
+          <button class="btn">Bloquear</button>
+        </form>
+        <div class="tablewrap" style="margin-top:14px"><table>
+          <thead><tr><th>Día</th><th>Horario</th><th>Motivo</th><th></th></tr></thead>
+          <tbody id="tablaBloqueos"></tbody>
+        </table></div>
+      </div>
+
+      <div class="card hidden" data-panel="nueva">
+        <h2>Agendar manualmente</h2>
+        <p class="muted">Para pacientes que te escriben por teléfono o WhatsApp. Se usa el mismo formulario de reserva.</p>
+        <button class="btn" type="button" id="btnIrReserva">Abrir formulario de reserva</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<footer><a id="creditos"></a> · <a href="#admin" id="linkAdmin">Acceso profesional</a></footer>
+
+<script>
+/* ===================== ALMACENAMIENTO =====================
+   Interfaz única: si se cambia a Supabase / Firebase / Google Sheets
+   solo hay que reescribir estas funciones (mismas firmas, async). */
+const REMOTO = !!(CONFIG.supabaseUrl && CONFIG.supabaseKey && window.supabase);
+const sb = REMOTO ? window.supabase.createClient(CONFIG.supabaseUrl, CONFIG.supabaseKey) : null;
+const hhmm = t => t ? String(t).slice(0,5) : "";
+
+const StoreLocal = (() => {
+  const KEY = "agenda:" + CONFIG.negocio.toLowerCase().replace(/[^a-z0-9]+/g,"-");
+  const read = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {citas:[],bloqueos:[]}; } catch { return {citas:[],bloqueos:[]}; } };
+  const write = d => { try { localStorage.setItem(KEY, JSON.stringify(d)); } catch(e){ alert("No se pudo guardar en este navegador."); } };
+  return {
+    async login(email, clave){ return clave === CONFIG.pinAdmin; },
+    async logout(){},
+    async sesion(){ return false; },
+    // Solo horarios ocupados, sin datos personales (lo único que ve la paciente)
+    async ocupados(desde, hasta){
+      const d=read();
+      return [
+        ...d.citas.filter(c=>c.estado!=="cancelada" && c.fecha>=desde && c.fecha<=hasta).map(c=>({fecha:c.fecha,hora:c.hora,minutos:c.minutos})),
+        ...d.bloqueos.filter(b=>b.fecha>=desde && b.fecha<=hasta).map(b=>b.desde?{fecha:b.fecha,hora:b.desde,minutos:toMin(b.hasta)-toMin(b.desde)}:{fecha:b.fecha,hora:"00:00",minutos:1440})
+      ];
+    },
+    async citas()        { return read().citas; },
+    async bloqueos()     { return read().bloqueos; },
+    async crearCita(c)   { const d=read();
+                           if (d.citas.some(x=>x.estado!=="cancelada" && solapa(x,c))) throw new Error("Esa hora acaba de ser tomada. Elige otra.");
+                           d.citas.push(c); write(d); return c; },
+    async actualizarCita(id, cambios){ const d=read(); const c=d.citas.find(x=>x.id===id); if(c) Object.assign(c,cambios); write(d); },
+    async crearBloqueo(b){ const d=read(); d.bloqueos.push(b); write(d); },
+    async borrarBloqueo(id){ const d=read(); d.bloqueos=d.bloqueos.filter(b=>b.id!==id); write(d); }
+  };
+})();
+
+const StoreSupabase = {
+  async login(email, clave){
+    const { error } = await sb.auth.signInWithPassword({ email, password: clave });
+    if (error) return false;
+    const { data: admin } = await sb.rpc("es_admin");                    // ¿está autorizada?
+    if (admin !== true) { await sb.auth.signOut(); return false; }
+    return true;
+  },
+  async logout(){ await sb.auth.signOut(); },
+  async sesion(){ const { data } = await sb.auth.getSession(); return !!data.session; },
+  async ocupados(desde, hasta){
+    const { data, error } = await sb.rpc("horarios_ocupados", { p_desde: desde, p_hasta: hasta });
+    if (error) throw new Error("No se pudo cargar la agenda. Intenta de nuevo.");
+    return data.map(o=>({fecha:o.fecha, hora:hhmm(o.hora), minutos:o.minutos}));
+  },
+  async citas(){
+    const { data, error } = await sb.from("citas").select("*").order("fecha").order("hora");
+    if (error) throw error;
+    return data.map(c=>({...c, hora:hhmm(c.hora), creada:c.creada}));
+  },
+  async bloqueos(){
+    const { data, error } = await sb.from("bloqueos").select("*");
+    if (error) throw error;
+    return data.map(b=>({...b, desde:hhmm(b.desde), hasta:hhmm(b.hasta)}));
+  },
+  async crearCita(c){
+    const { data, error } = await sb.rpc("reservar", {
+      p_fecha:c.fecha, p_hora:c.hora, p_minutos:c.minutos, p_servicio:c.servicio, p_precio:c.precio,
+      p_nombre:c.nombre, p_rut:c.rut, p_telefono:c.telefono, p_email:c.email, p_nota:c.nota });
+    if (error) throw new Error(error.message.includes("ocupada") ? "Esa hora acaba de ser tomada. Elige otra." : "No se pudo reservar. Intenta de nuevo.");
+    return { ...c, id:data };
+  },
+  async actualizarCita(id, cambios){ const { error } = await sb.from("citas").update(cambios).eq("id", id); if (error) throw error; },
+  async crearBloqueo(b){ const { id, ...resto } = b;
+    const { error } = await sb.from("bloqueos").insert({ ...resto, desde:b.desde||null, hasta:b.hasta||null }); if (error) throw error; },
+  async borrarBloqueo(id){ const { error } = await sb.from("bloqueos").delete().eq("id", id); if (error) throw error; }
+};
+const Store = REMOTO ? StoreSupabase : StoreLocal;
+
+/* ===================== UTILIDADES ===================== */
+const $ = s => document.querySelector(s);
+const esc = s => String(s??"").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pad = n => String(n).padStart(2,"0");
+const ymd = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const toMin = hhmm => { const [h,m]=hhmm.split(":").map(Number); return h*60+m; };
+const toHHMM = m => `${pad(Math.floor(m/60))}:${pad(m%60)}`;
+const uid = () => (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36)+Math.random().toString(36).slice(2));
+const money = n => new Intl.NumberFormat("es-CL",{style:"currency",currency:CONFIG.moneda,maximumFractionDigits:0}).format(n);
+const fechaLarga = s => { const t=new Date(s+"T12:00").toLocaleDateString("es-CL",{weekday:"long",day:"numeric",month:"long"}); return t[0].toUpperCase()+t.slice(1); };
+const servicio = id => CONFIG.servicios.find(s=>s.id===id) || {nombre:id,minutos:30,precio:0};
+function solapa(a,b){ return a.fecha===b.fecha && toMin(a.hora) < toMin(b.hora)+b.minutos && toMin(b.hora) < toMin(a.hora)+a.minutos; }
+
+function validarRut(rut){
+  const r = rut.replace(/[.\-\s]/g,"").toUpperCase();
+  if(!/^\d{7,8}[0-9K]$/.test(r)) return false;
+  let suma=0, mul=2;
+  for(let i=r.length-2;i>=0;i--){ suma+= +r[i]*mul; mul = mul===7?2:mul+1; }
+  const dv = 11 - (suma % 11);
+  return r.at(-1) === (dv===11?"0":dv===10?"K":String(dv));
+}
+
+/* Calcula horas libres de un día para un servicio */
+let cacheOcupados = null;
+async function cargarOcupados(){
+  const hoy=new Date(), fin=new Date(); fin.setDate(hoy.getDate()+CONFIG.diasAdelante);
+  cacheOcupados = await Store.ocupados(ymd(hoy), ymd(fin));
+}
+function horasLibres(fecha, minutos){
+  const dow = new Date(fecha+"T12:00").getDay();
+  const bloques = CONFIG.horario[dow] || [];
+  const ocup = (cacheOcupados||[]).filter(o=>o.fecha===fecha);
+  const limite = Date.now() + CONFIG.anticipacionMinHoras*3600e3;
+  const libres = [];
+  for (const [ini,fin] of bloques){
+    for (let m=toMin(ini); m+minutos<=toMin(fin); m+=CONFIG.intervaloMin){
+      const cand = {fecha, hora:toHHMM(m), minutos};
+      if (new Date(`${fecha}T${cand.hora}`).getTime() < limite) continue;
+      if (ocup.some(o=>solapa(o,cand))) continue;
+      libres.push(cand.hora);
+    }
+  }
+  return libres;
+}
+
+/* ===================== MARCA ===================== */
+document.title = "Agenda tu hora · " + CONFIG.negocio;
+document.documentElement.style.setProperty("--brand", CONFIG.colorMarca);
+document.documentElement.style.setProperty("--brand-2", CONFIG.colorSuave);
+$("#titulo").textContent = CONFIG.negocio;
+$("#bajada").textContent = CONFIG.bajada;
+$("#logo").textContent = CONFIG.icono || CONFIG.negocio.split(" ").map(w=>w[0]).slice(0,2).join("");
+$("#txtConsent").textContent = CONFIG.textoConsentimiento;
+$("#creditos").textContent = CONFIG.creditos.texto; $("#creditos").href = CONFIG.creditos.url;
+if(!CONFIG.pedirRut) $("#wrapRut").classList.add("hidden");
+
+/* ===================== FLUJO PACIENTE ===================== */
+const sel = { servicio:null, fecha:null, hora:null };
+
+function pintarServicios(){
+  $("#listaServicios").innerHTML = CONFIG.servicios.map(s=>`
+    <button type="button" class="opt" data-id="${esc(s.id)}" aria-pressed="${sel.servicio===s.id}">
+      <b>${esc(s.nombre)}</b>
+      <span class="muted">${s.minutos} min · ${money(s.precio)}</span><br>
+      <span class="muted">${esc(s.detalle||"")}</span>
+    </button>`).join("");
+}
+$("#listaServicios").addEventListener("click", e=>{
+  const b = e.target.closest(".opt"); if(!b) return;
+  sel.servicio = b.dataset.id; sel.hora=null;
+  pintarServicios(); pintarDias(); $("#formDatos").classList.add("hidden");
+});
+
+async function pintarDias(){
+  const s = servicio(sel.servicio);
+  $("#ayudaFecha").textContent = "Días con horas disponibles:";
+  $("#listaDias").innerHTML = `<p class="muted">Cargando horas…</p>`; $("#listaHoras").innerHTML="";
+  try { await cargarOcupados(); } catch(e){ $("#listaDias").innerHTML = `<p class="muted" style="color:var(--bad)">${esc(e.message)}</p>`; return; }
+  const hoy = new Date(); const out=[];
+  let primero=null;
+  for(let i=0;i<CONFIG.diasAdelante;i++){
+    const d = new Date(hoy); d.setDate(hoy.getDate()+i);
+    const f = ymd(d);
+    const libres = horasLibres(f, s.minutos).length;
+    if(libres && !primero) primero=f;
+    out.push(`<button type="button" class="opt day" data-f="${f}" ${libres?"":"disabled"} aria-pressed="${sel.fecha===f}">
+      <small>${d.toLocaleDateString("es-CL",{weekday:"short"})}</small><b>${d.getDate()}</b><small>${d.toLocaleDateString("es-CL",{month:"short"})}</small></button>`);
+  }
+  $("#listaDias").innerHTML = out.join("");
+  if(!sel.fecha || !$(`.day[data-f="${sel.fecha}"]:not([disabled])`)) sel.fecha = primero;
+  marcarDia(); pintarHoras();
+}
+function marcarDia(){ document.querySelectorAll(".day").forEach(b=>b.setAttribute("aria-pressed", b.dataset.f===sel.fecha)); }
+$("#listaDias").addEventListener("click", e=>{
+  const b=e.target.closest(".day"); if(!b||b.disabled) return;
+  sel.fecha=b.dataset.f; sel.hora=null; marcarDia(); pintarHoras(); $("#formDatos").classList.add("hidden");
+});
+
+async function pintarHoras(){
+  if(!sel.fecha){ $("#listaHoras").innerHTML = `<p class="muted">No hay horas disponibles en los próximos ${CONFIG.diasAdelante} días.</p>`; return; }
+  const libres = horasLibres(sel.fecha, servicio(sel.servicio).minutos);
+  $("#listaHoras").innerHTML = `<p class="muted" style="grid-column:1/-1;margin:0">${fechaLarga(sel.fecha)}</p>` +
+    libres.map(h=>`<button type="button" class="opt slot" data-h="${h}" aria-pressed="${sel.hora===h}">${h}</button>`).join("");
+}
+$("#listaHoras").addEventListener("click", e=>{
+  const b=e.target.closest(".slot"); if(!b) return;
+  sel.hora=b.dataset.h; pintarHoras();
+  const s=servicio(sel.servicio);
+  $("#resumen").innerHTML = `<b>${esc(s.nombre)}</b> · ${s.minutos} min · ${money(s.precio)}<br>${fechaLarga(sel.fecha)} a las <b>${sel.hora}</b>`;
+  $("#formDatos").classList.remove("hidden");
+  $("#formDatos").scrollIntoView({behavior:"smooth",block:"start"});
+});
+
+$("#formDatos").addEventListener("submit", async e=>{
+  e.preventDefault();
+  const err = $("#errForm"); err.classList.add("hidden");
+  const rut = $("#fRut").value.trim();
+  if(CONFIG.pedirRut && rut && !validarRut(rut)){ err.textContent="El RUT no es válido."; err.classList.remove("hidden"); return; }
+  const tel = $("#fTel").value.replace(/[^\d+]/g,"");
+  if(tel.replace(/\D/g,"").length < 8){ err.textContent="Revisa el teléfono."; err.classList.remove("hidden"); return; }
+  const s = servicio(sel.servicio);
+  const cita = { id:uid(), creada:new Date().toISOString(), estado:"confirmada",
+    servicio:s.id, minutos:s.minutos, precio:s.precio, fecha:sel.fecha, hora:sel.hora,
+    nombre:$("#fNombre").value.trim(), rut, telefono:tel, email:$("#fEmail").value.trim(), nota:$("#fNota").value.trim() };
+  const btn = e.target.querySelector("button[type=submit]"); btn.disabled = true;
+  try { await Store.crearCita(cita); }
+  catch(ex){ err.textContent=ex.message; err.classList.remove("hidden"); btn.disabled=false; pintarDias(); return; }
+  btn.disabled = false;
+  mostrarOk(cita);
+});
+
+let ultimaCita=null;
+function mostrarOk(c){
+  ultimaCita=c;
+  const s=servicio(c.servicio);
+  $("#resumenOk").innerHTML = `<b>${esc(c.nombre)}</b><br>${esc(s.nombre)} · ${fechaLarga(c.fecha)} a las <b>${c.hora}</b>`;
+  $("#dirOk").textContent = CONFIG.direccion;
+  const msg = `Hola, agendé ${s.nombre} para el ${fechaLarga(c.fecha)} a las ${c.hora}. Nombre: ${c.nombre}.`;
+  $("#btnWsp").href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
+  document.querySelectorAll("#vistaPaciente > .card:not(#cardOk), #formDatos").forEach(x=>x.classList.add("hidden"));
+  $("#cardOk").classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+$("#btnOtra").onclick = ()=>{
+  Object.assign(sel,{servicio:null,fecha:null,hora:null});
+  $("#formDatos").reset();
+  $("#cardOk").classList.add("hidden");
+  document.querySelectorAll("#vistaPaciente > .card:not(#cardOk)").forEach(x=>x.classList.remove("hidden"));
+  $("#formDatos").classList.add("hidden");
+  $("#listaDias").innerHTML=""; $("#listaHoras").innerHTML=""; $("#ayudaFecha").textContent="Primero elige una atención.";
+  pintarServicios();
+};
+$("#btnIcs").onclick = ()=>{
+  const c=ultimaCita, s=servicio(c.servicio);
+  const ini=new Date(`${c.fecha}T${c.hora}`), fin=new Date(ini.getTime()+c.minutos*60e3);
+  const f = d => d.toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");
+  const ics = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Solis media//Agenda//ES","BEGIN:VEVENT",
+    `UID:${c.id}`,`DTSTAMP:${f(new Date())}`,`DTSTART:${f(ini)}`,`DTEND:${f(fin)}`,
+    `SUMMARY:${s.nombre} - ${CONFIG.negocio}`,`LOCATION:${CONFIG.direccion.replace(/,/g,"\\,")}`,
+    "BEGIN:VALARM","TRIGGER:-PT2H","ACTION:DISPLAY","DESCRIPTION:Recordatorio","END:VALARM",
+    "END:VEVENT","END:VCALENDAR"].join("\r\n");
+  descargar(ics,"hora.ics","text/calendar");
+};
+function descargar(txt,nombre,tipo){
+  const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([txt],{type:tipo})); a.download=nombre; a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+
+/* ===================== PANEL PROFESIONAL ===================== */
+let logueado = false;
+function router(){
+  const admin = location.hash === "#admin";
+  $("#vistaPaciente").classList.toggle("hidden", admin);
+  $("#vistaAdmin").classList.toggle("hidden", !admin);
+  $("#linkAdmin").textContent = admin ? "Volver a reservas" : "Acceso profesional";
+  $("#linkAdmin").href = admin ? "#" : "#admin";
+  if(admin && logueado) pintarAgenda();
+  if(!admin) { pintarServicios(); if(sel.servicio) pintarDias(); }
+}
+window.addEventListener("hashchange", router);
+
+function entrar(){
+  logueado=true; $("#errLogin").classList.add("hidden");
+  $("#cardLogin").classList.add("hidden"); $("#panel").classList.remove("hidden");
+  $("#diaAdmin").value = ymd(new Date()); pintarAgenda();
+}
+$("#formLogin").addEventListener("submit", async e=>{
+  e.preventDefault();
+  if (await Store.login($("#loginEmail").value.trim(), $("#pin").value)) entrar();
+  else $("#errLogin").classList.remove("hidden");
+});
+$("#btnSalir").onclick = async ()=>{ await Store.logout(); logueado=false; $("#pin").value=""; $("#panel").classList.add("hidden"); $("#cardLogin").classList.remove("hidden"); };
+if (!REMOTO) { $("#loginEmail").classList.add("hidden"); $("#pin").placeholder = "PIN"; $("#pin").inputMode = "numeric"; }
+else { $("#demoNotice").classList.add("hidden"); Store.sesion().then(ok=>{ if(ok && location.hash==="#admin") entrar(); }); }
+
+document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("[data-tab]").forEach(x=>x.classList.toggle("ghost", x!==b));
+  document.querySelectorAll("[data-panel]").forEach(p=>p.classList.toggle("hidden", p.dataset.panel!==b.dataset.tab));
+  if(b.dataset.tab==="bloqueos") pintarBloqueos();
+});
+$("#btnIrReserva").onclick = ()=>{ location.hash=""; };
+
+const moverDia = n => { const d=new Date($("#diaAdmin").value+"T12:00"); d.setDate(d.getDate()+n); $("#diaAdmin").value=ymd(d); pintarAgenda(); };
+$("#diaPrev").onclick=()=>moverDia(-1); $("#diaNext").onclick=()=>moverDia(1);
+$("#diaHoy").onclick=()=>{ $("#diaAdmin").value=ymd(new Date()); pintarAgenda(); };
+$("#diaAdmin").onchange = pintarAgenda;
+
+async function pintarAgenda(){
+  const f = $("#diaAdmin").value;
+  const todas = await Store.citas();
+  const delDia = todas.filter(c=>c.fecha===f).sort((a,b)=>a.hora.localeCompare(b.hora));
+  const activas = delDia.filter(c=>c.estado!=="cancelada");
+  $("#statsDia").innerHTML = `${fechaLarga(f)} · ${activas.length} hora(s) · ${money(activas.reduce((t,c)=>t+(c.precio||0),0))} estimado`;
+  $("#tablaAgenda").innerHTML = delDia.length ? delDia.map(c=>`
+    <tr>
+      <td><b>${c.hora}</b><br><span class="muted">${c.minutos} min</span></td>
+      <td>${esc(c.nombre)}${c.rut?`<br><span class="muted">${esc(c.rut)}</span>`:""}<br>
+        <a href="https://wa.me/${esc(c.telefono.replace(/\D/g,""))}" target="_blank" rel="noopener">${esc(c.telefono)}</a>
+        ${c.email?`<br><span class="muted">${esc(c.email)}</span>`:""}
+        ${c.nota?`<br><span class="muted">“${esc(c.nota)}”</span>`:""}</td>
+      <td>${esc(servicio(c.servicio).nombre)}</td>
+      <td><span class="tag ${c.estado}">${c.estado}</span></td>
+      <td class="row">
+        ${c.estado==="confirmada"?`<button class="btn small" data-acc="atendida" data-id="${c.id}">Atendida</button>
+        <button class="btn small danger" data-acc="cancelada" data-id="${c.id}">Cancelar</button>`:
+        `<button class="btn small ghost" data-acc="confirmada" data-id="${c.id}">Reabrir</button>`}
+      </td>
+    </tr>`).join("") : `<tr><td colspan="5" class="muted">Sin horas este día.</td></tr>`;
+
+  const hoy = ymd(new Date());
+  const prox = todas.filter(c=>c.fecha>=hoy && c.estado==="confirmada").sort((a,b)=>(a.fecha+a.hora).localeCompare(b.fecha+b.hora)).slice(0,15);
+  $("#tablaProximas").innerHTML = prox.length ? prox.map(c=>`<tr><td>${fechaLarga(c.fecha)}</td><td>${c.hora}</td><td>${esc(c.nombre)}</td><td>${esc(servicio(c.servicio).nombre)}</td></tr>`).join("")
+    : `<tr><td colspan="4" class="muted">No hay horas próximas.</td></tr>`;
+}
+$("#tablaAgenda").addEventListener("click", async e=>{
+  const b=e.target.closest("[data-acc]"); if(!b) return;
+  if(b.dataset.acc==="cancelada" && !confirm("¿Cancelar esta hora? Quedará libre para otra paciente.")) return;
+  await Store.actualizarCita(b.dataset.id,{estado:b.dataset.acc}); pintarAgenda();
+});
+
+$("#formBloqueo").addEventListener("submit", async e=>{
+  e.preventDefault();
+  const desde=$("#bDesde").value, hasta=$("#bHasta").value;
+  if((desde&&!hasta)||(!desde&&hasta)||(desde&&hasta<=desde)){ alert("Revisa el horario: completa 'desde' y 'hasta', o deja ambos vacíos."); return; }
+  await Store.crearBloqueo({id:uid(), fecha:$("#bFecha").value, desde, hasta, motivo:$("#bMotivo").value.trim()});
+  e.target.reset(); pintarBloqueos();
+});
+async function pintarBloqueos(){
+  const bs = (await Store.bloqueos()).filter(b=>b.fecha>=ymd(new Date())).sort((a,b)=>(a.fecha+a.desde).localeCompare(b.fecha+b.desde));
+  $("#tablaBloqueos").innerHTML = bs.length ? bs.map(b=>`<tr><td>${fechaLarga(b.fecha)}</td><td>${b.desde?`${b.desde}–${b.hasta}`:"Día completo"}</td><td>${esc(b.motivo)}</td>
+    <td><button class="btn small ghost" data-del="${b.id}">Quitar</button></td></tr>`).join("") : `<tr><td colspan="4" class="muted">Sin bloqueos.</td></tr>`;
+}
+$("#tablaBloqueos").addEventListener("click", async e=>{
+  const b=e.target.closest("[data-del]"); if(!b) return; await Store.borrarBloqueo(b.dataset.del); pintarBloqueos();
+});
+
+$("#btnCsv").onclick = async ()=>{
+  const cols=["fecha","hora","estado","nombre","rut","telefono","email","servicio","minutos","precio","nota","creada"];
+  const q = v => `"${String(v??"").replace(/"/g,'""')}"`;
+  const rows = (await Store.citas()).sort((a,b)=>(a.fecha+a.hora).localeCompare(b.fecha+b.hora))
+    .map(c=>cols.map(k=>q(k==="servicio"?servicio(c.servicio).nombre:c[k])).join(";"));
+  descargar("﻿"+[cols.join(";"),...rows].join("\n"), `agenda-${ymd(new Date())}.csv`, "text/csv");
+};
+
+router();
+</script>
+</body>
+</html>
