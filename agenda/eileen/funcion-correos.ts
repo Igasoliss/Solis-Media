@@ -158,9 +158,10 @@ async function programados() {
     if (!b.review_sent_at && !conResena.has(b.id) && ahora - fin >= 180 && ahora - fin <= 3 * 1440) {
       const { data: lock } = await db.from("reservas").update({ review_sent_at: new Date().toISOString() }).eq("id", b.id).is("review_sent_at", null).select("id");
       if (lock?.length) {
-        await enviar(b.email, `¿Cómo te fue en tu atención, ${nombre}?`, plantilla(n, `¿Cómo te fue, ${esc(nombre)}?`,
-          `<p style="margin:0;color:#6E6A6C">Gracias por venir. Tu opinión ayuda mucho a ${esc(n.name)} y a otras pacientes. Te toma un minuto.</p>${resumen(svc, b)}`,
-          { texto: "Dejar mi reseña ★★★★★", url: `${SITE}?resena=${b.token}` }));
+        const yo = n.name.replace(/^(matrona|matr[oó]n|dra?\.?|doctora?|lic\.?|klgo\.?|kine)\s+/i, "").split(" ")[0];
+        await enviar(b.email, `¿Qué te pareció mi atención, ${nombre}?`, plantilla(n, `Hola ${esc(nombre)}, ¿qué te pareció mi atención?`,
+          `<p style="margin:0 0 10px;line-height:1.6">Gracias por venir a tu hora. Me encantaría saber cómo te sentiste.</p><p style="margin:0;line-height:1.6;color:#6E6A6C">Tu opinión me ayuda mucho a mejorar y orienta a otras pacientes que buscan atención. Te toma un minuto.</p>${resumen(svc, b)}<p style="margin:0;line-height:1.6">Un abrazo,<br><b>${esc(yo)}</b></p>`,
+          { texto: "Dejar mi opinión ★★★★★", url: `${SITE}?resena=${b.token}` }));
         resenas++;
       }
     }
