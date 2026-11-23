@@ -10,7 +10,16 @@ const SITE = "https://igasoliss.github.io/Solis-Media/agenda-eileen/";
 const FROM = "Agenda Matrona Eileen Cartes <agenda@solismedia.cl>";
 const TZ = "America/Santiago";
 const RESEND = Deno.env.get("RESEND_API_KEY") ?? "";
-const db = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
+// Clave de servidor: el formato nuevo (sb_secret_...) o el antiguo (service_role)
+function claveServidor() {
+  try {
+    const k = JSON.parse(Deno.env.get("SUPABASE_SECRET_KEYS") ?? "{}");
+    const v = k.default ?? Object.values(k)[0];
+    if (v) return String(v);
+  } catch (_) { /* sin claves nuevas */ }
+  return Deno.env.get("SUPABASE_SECRET_KEY") ?? Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+}
+const db = createClient(Deno.env.get("SUPABASE_URL")!, claveServidor(), { auth: { persistSession: false } });
 
 const cors = {
   "Access-Control-Allow-Origin": "*",
@@ -84,7 +93,8 @@ async function enviar(to: string | string[], subject: string, html: string) {
 type Reserva = { id: string; token: string; service_id: string; date: string; start_min: number; end_min: number; name: string; email: string | null; phone: string | null; note: string | null; status: string; source: string; created_at: string; confirm_sent_at: string | null; reminder_sent_at: string | null; review_sent_at: string | null; cancel_notified_at: string | null };
 
 async function nueva(token: string) {
-  const { data: b } = await db.from("reservas").select("*").eq("token", token).maybeSingle<Reserva>();
+  const { data: b, error } = await db.from("reservas").select("*").eq("token", token).maybeSingle<Reserva>();
+  if (error) throw new Error("DB: " + error.message);
   if (!b || b.status !== "confirmed" || b.confirm_sent_at) return { skipped: true };
   // Marcar primero, así dos llamadas seguidas no mandan dos correos
   const { data: lock } = await db.from("reservas").update({ confirm_sent_at: new Date().toISOString() }).eq("id", b.id).is("confirm_sent_at", null).select("id");
@@ -166,6 +176,10 @@ Deno.serve(async (req) => {
     if (body.tipo === "nueva" && tok) return json(await nueva(tok));
     if (body.tipo === "cancelada" && tok) return json(await cancelada(tok));
     if (body.tipo === "programados") return json(await programados());
+    if (body.tipo === "diagnostico") {
+      const { count, error } = await db.from("reservas").select("id", { count: "exact", head: true });
+      return json({ claves: ["SUPABASE_SECRET_KEYS", "SUPABASE_SECRET_KEY", "SUPABASE_SERVICE_ROLE_KEY", "RESEND_API_KEY"].filter((k) => !!Deno.env.get(k)), reservas: count, error: error?.message ?? null });
+    }
     return json({ error: "Solicitud no válida" }, 400);
   } catch (e) {
     console.error(e);
