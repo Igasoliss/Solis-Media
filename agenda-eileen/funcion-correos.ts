@@ -1,7 +1,7 @@
 // Supabase Edge Function "correos" · Agenda online Solís Media
 // Envía con Resend: confirmación a la paciente (con opción de cancelar), aviso
 // de nueva hora y de cancelación a la profesional, recordatorio 24 h antes y
-// solicitud de reseña 2 h después de la atención.
+// solicitud de reseña 3 h después de la atención.
 // Cada correo se envía una sola vez (columnas *_sent_at), así que llamar la
 // función de más no duplica nada.
 import { createClient } from "npm:@supabase/supabase-js@2.45.4";
@@ -154,8 +154,8 @@ async function programados() {
         recordatorios++;
       }
     }
-    // Reseña: 2 h después de terminar, hasta 3 días después
-    if (!b.review_sent_at && !conResena.has(b.id) && ahora - fin >= 120 && ahora - fin <= 3 * 1440) {
+    // Reseña: 3 h después de terminar, hasta 3 días después
+    if (!b.review_sent_at && !conResena.has(b.id) && ahora - fin >= 180 && ahora - fin <= 3 * 1440) {
       const { data: lock } = await db.from("reservas").update({ review_sent_at: new Date().toISOString() }).eq("id", b.id).is("review_sent_at", null).select("id");
       if (lock?.length) {
         await enviar(b.email, `¿Cómo te fue en tu atención, ${nombre}?`, plantilla(n, `¿Cómo te fue, ${esc(nombre)}?`,
