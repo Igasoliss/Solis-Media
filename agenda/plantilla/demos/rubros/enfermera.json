@@ -1,0 +1,119 @@
+{
+ "id": "enfermera",
+ "rubro": "Enfermera",
+ "gente": "pacientes",
+ "slotStep": 15,
+ "business": {
+  "name": "Enf. Daniela Fuentes",
+  "tagline": "Procedimientos de enfermería en consulta y a domicilio",
+  "servicesTitle": "¿Qué necesitas?",
+  "address": "Centro de Concepción",
+  "phone": "",
+  "ink": "#1D4E89",
+  "accent": "#BFD9F7",
+  "bg": "#F4F8FD",
+  "whatsapp": "56953241997",
+  "instagram": "",
+  "website": ""
+ },
+ "services": [
+  {
+   "id": "inyeccion",
+   "name": "Administración de inyectable",
+   "duration": 15,
+   "price": "$6.000",
+   "description": "Con receta médica vigente."
+  },
+  {
+   "id": "curacion",
+   "name": "Curación simple",
+   "duration": 30,
+   "price": "$12.000",
+   "description": "Heridas y post operatorio."
+  },
+  {
+   "id": "curacion-avanzada",
+   "name": "Curación avanzada",
+   "duration": 45,
+   "price": "Consultar",
+   "description": "Pie diabético, úlceras y heridas complejas."
+  },
+  {
+   "id": "sonda",
+   "name": "Instalación de sonda",
+   "duration": 30,
+   "price": "Consultar",
+   "description": "Sonda Foley o nasogástrica."
+  },
+  {
+   "id": "presion",
+   "name": "Control de presión y glicemia",
+   "duration": 15,
+   "price": "$5.000",
+   "description": "Con registro para tu médico."
+  },
+  {
+   "id": "domicilio",
+   "name": "Visita a domicilio",
+   "duration": 60,
+   "price": "Consultar",
+   "description": "Según comuna y procedimiento."
+  }
+ ],
+ "hours": {
+  "0": [],
+  "1": [
+   [
+    "08:00",
+    "18:00"
+   ]
+  ],
+  "2": [
+   [
+    "08:00",
+    "18:00"
+   ]
+  ],
+  "3": [
+   [
+    "08:00",
+    "18:00"
+   ]
+  ],
+  "4": [
+   [
+    "08:00",
+    "18:00"
+   ]
+  ],
+  "5": [
+   [
+    "08:00",
+    "18:00"
+   ]
+  ],
+  "6": [
+   [
+    "09:00",
+    "13:00"
+   ]
+  ]
+ },
+ "names": [
+  "Rosa M.",
+  "Juan C.",
+  "Patricia V.",
+  "Luis G.",
+  "Carmen S.",
+  "Andrés R."
+ ],
+ "reviews": [
+  "Muy delicada con las curaciones de mi mamá.",
+  "Llegó puntual a la casa, un siete.",
+  "Explica todo con calma y paciencia.",
+  "Las inyecciones ni las sentí.",
+  "Súper responsable y ordenada.",
+  "Fácil agendar y confirmar."
+ ],
+ "density": 0.22
+}

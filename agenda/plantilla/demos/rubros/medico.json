@@ -1,0 +1,114 @@
+{
+ "id": "medico",
+ "rubro": "Médico general",
+ "gente": "pacientes",
+ "slotStep": 15,
+ "business": {
+  "name": "Dr. Andrés Muñoz",
+  "tagline": "Medicina general · Adultos y adolescentes",
+  "servicesTitle": "¿Qué atención necesitas?",
+  "address": "Centro de Concepción",
+  "phone": "",
+  "ink": "#0F4C45",
+  "accent": "#A8E6CF",
+  "bg": "#F3F9F6",
+  "whatsapp": "56953241997",
+  "instagram": "",
+  "website": ""
+ },
+ "services": [
+  {
+   "id": "consulta",
+   "name": "Consulta medicina general",
+   "duration": 30,
+   "price": "$30.000",
+   "description": "Evaluación, diagnóstico y tratamiento."
+  },
+  {
+   "id": "control",
+   "name": "Control con exámenes",
+   "duration": 20,
+   "price": "$22.000",
+   "description": "Revisión de exámenes y ajuste de tratamiento."
+  },
+  {
+   "id": "certificado",
+   "name": "Certificado médico",
+   "duration": 15,
+   "price": "$15.000",
+   "description": "Deportivo, laboral o escolar."
+  },
+  {
+   "id": "cronico",
+   "name": "Control de enfermedades crónicas",
+   "duration": 30,
+   "price": "$28.000",
+   "description": "Hipertensión, diabetes, colesterol."
+  },
+  {
+   "id": "tele",
+   "name": "Teleconsulta",
+   "duration": 20,
+   "price": "$25.000",
+   "description": "Por videollamada, con receta electrónica."
+  },
+  {
+   "id": "domicilio",
+   "name": "Visita a domicilio",
+   "duration": 60,
+   "price": "Consultar",
+   "description": "Según comuna."
+  }
+ ],
+ "hours": {
+  "0": [],
+  "1": [
+   [
+    "09:00",
+    "19:00"
+   ]
+  ],
+  "2": [
+   [
+    "09:00",
+    "19:00"
+   ]
+  ],
+  "3": [
+   [
+    "09:00",
+    "19:00"
+   ]
+  ],
+  "4": [
+   [
+    "09:00",
+    "19:00"
+   ]
+  ],
+  "5": [
+   [
+    "09:00",
+    "19:00"
+   ]
+  ],
+  "6": []
+ },
+ "names": [
+  "Carlos P.",
+  "María José L.",
+  "Gonzalo R.",
+  "Sofía M.",
+  "Eduardo T.",
+  "Bárbara N."
+ ],
+ "reviews": [
+  "Me escuchó sin apuro, eso se agradece.",
+  "Muy claro para explicar los exámenes.",
+  "Puntual, cero espera.",
+  "La teleconsulta funcionó perfecto.",
+  "Excelente trato con mis papás.",
+  "Agendé de noche desde el celular, muy cómodo."
+ ],
+ "density": 0.22
+}

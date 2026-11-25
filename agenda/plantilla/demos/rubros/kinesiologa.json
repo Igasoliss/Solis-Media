@@ -1,0 +1,119 @@
+{
+ "id": "kinesiologa",
+ "rubro": "Kinesióloga",
+ "gente": "pacientes",
+ "slotStep": 15,
+ "business": {
+  "name": "Klga. Valentina Rojas",
+  "tagline": "Kinesiología musculoesquelética y deportiva",
+  "servicesTitle": "¿Qué atención necesitas?",
+  "address": "Centro de Concepción",
+  "phone": "",
+  "ink": "#174A5A",
+  "accent": "#9FE0D6",
+  "bg": "#F1F8F7",
+  "whatsapp": "56953241997",
+  "instagram": "",
+  "website": ""
+ },
+ "services": [
+  {
+   "id": "evaluacion",
+   "name": "Evaluación kinésica",
+   "duration": 60,
+   "price": "$25.000",
+   "description": "Primera sesión: evaluación y plan de tratamiento."
+  },
+  {
+   "id": "sesion",
+   "name": "Sesión de kinesiología",
+   "duration": 45,
+   "price": "$20.000",
+   "description": "Terapia manual, ejercicio y agentes físicos."
+  },
+  {
+   "id": "deportiva",
+   "name": "Kinesiología deportiva",
+   "duration": 45,
+   "price": "$22.000",
+   "description": "Lesiones y vuelta al deporte."
+  },
+  {
+   "id": "piso",
+   "name": "Rehabilitación de piso pélvico",
+   "duration": 60,
+   "price": "Consultar",
+   "description": "Evaluación y ejercicios guiados."
+  },
+  {
+   "id": "masaje",
+   "name": "Masaje descontracturante",
+   "duration": 50,
+   "price": "$22.000",
+   "description": "Cuello, espalda y hombros."
+  },
+  {
+   "id": "domicilio",
+   "name": "Atención a domicilio",
+   "duration": 60,
+   "price": "Consultar",
+   "description": "Según comuna y tipo de tratamiento."
+  }
+ ],
+ "hours": {
+  "0": [],
+  "1": [
+   [
+    "08:30",
+    "19:30"
+   ]
+  ],
+  "2": [
+   [
+    "08:30",
+    "19:30"
+   ]
+  ],
+  "3": [
+   [
+    "08:30",
+    "19:30"
+   ]
+  ],
+  "4": [
+   [
+    "08:30",
+    "19:30"
+   ]
+  ],
+  "5": [
+   [
+    "08:30",
+    "19:30"
+   ]
+  ],
+  "6": [
+   [
+    "09:00",
+    "13:00"
+   ]
+  ]
+ },
+ "names": [
+  "Rodrigo A.",
+  "Carolina B.",
+  "Felipe N.",
+  "Macarena F.",
+  "Ignacia T.",
+  "Cristóbal H."
+ ],
+ "reviews": [
+  "Me recuperé del esguince mucho antes de lo esperado.",
+  "Explica todo y te deja ejercicios para la casa.",
+  "Muy profesional, se nota que sabe.",
+  "Volví a correr sin dolor de rodilla.",
+  "Puntual y muy cercana.",
+  "El masaje me cambió la semana."
+ ],
+ "density": 0.22
+}

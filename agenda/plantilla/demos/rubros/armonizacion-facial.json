@@ -1,0 +1,133 @@
+{
+ "id": "armonizacion-facial",
+ "rubro": "Armonización facial",
+ "gente": "pacientes_f",
+ "slotStep": 15,
+ "business": {
+  "name": "Dra. Fernanda Lagos",
+  "tagline": "Odontóloga · Armonización orofacial natural",
+  "servicesTitle": "¿Qué te gustaría realzar?",
+  "address": "Centro de Concepción",
+  "phone": "",
+  "ink": "#6E1E2B",
+  "accent": "#EBCFC2",
+  "bg": "#FBF6F3",
+  "whatsapp": "56953241997",
+  "instagram": "",
+  "website": ""
+ },
+ "services": [
+  {
+   "id": "evaluacion",
+   "name": "Evaluación facial",
+   "duration": 30,
+   "price": "$20.000",
+   "description": "Analizamos tu rostro y armamos un plan natural. Se abona al tratamiento."
+  },
+  {
+   "id": "toxina",
+   "name": "Toxina botulínica (tercio superior)",
+   "duration": 45,
+   "price": "$180.000",
+   "description": "Frente, entrecejo y patas de gallo. Control a los 15 días."
+  },
+  {
+   "id": "labios",
+   "name": "Relleno de labios",
+   "duration": 60,
+   "price": "Consultar",
+   "description": "Ácido hialurónico, hidratación o volumen según tu evaluación."
+  },
+  {
+   "id": "rino",
+   "name": "Rinomodelación",
+   "duration": 60,
+   "price": "Consultar",
+   "description": "Sin cirugía, con ácido hialurónico."
+  },
+  {
+   "id": "mandibula",
+   "name": "Perfilado mandibular y mentón",
+   "duration": 60,
+   "price": "Consultar",
+   "description": "Define el contorno del rostro."
+  },
+  {
+   "id": "bioestimulador",
+   "name": "Bioestimuladores de colágeno",
+   "duration": 60,
+   "price": "Consultar",
+   "description": "Mejora firmeza y calidad de la piel."
+  },
+  {
+   "id": "bruxismo",
+   "name": "Toxina para bruxismo",
+   "duration": 30,
+   "price": "$160.000",
+   "description": "Alivia la tensión y el dolor mandibular."
+  },
+  {
+   "id": "control",
+   "name": "Control post tratamiento",
+   "duration": 20,
+   "price": "Sin costo",
+   "description": "Para pacientes en tratamiento."
+  }
+ ],
+ "hours": {
+  "0": [],
+  "1": [
+   [
+    "09:30",
+    "19:00"
+   ]
+  ],
+  "2": [
+   [
+    "09:30",
+    "19:00"
+   ]
+  ],
+  "3": [
+   [
+    "09:30",
+    "19:00"
+   ]
+  ],
+  "4": [
+   [
+    "09:30",
+    "19:00"
+   ]
+  ],
+  "5": [
+   [
+    "09:30",
+    "19:00"
+   ]
+  ],
+  "6": [
+   [
+    "10:00",
+    "14:00"
+   ]
+  ]
+ },
+ "names": [
+  "Constanza R.",
+  "Trinidad A.",
+  "Florencia D.",
+  "Magdalena C.",
+  "Javiera P.",
+  "Antonia V."
+ ],
+ "reviews": [
+  "Quedé natural, nadie nota que me hice algo, solo que me veo descansada.",
+  "Me explicó todo con mucha calma antes de empezar.",
+  "Los labios quedaron perfectos, justo lo que quería.",
+  "Clínica preciosa y súper limpia.",
+  "Se nota el criterio, no exagera nada.",
+  "Reservar online es comodísimo."
+ ],
+ "density": 0.22
+}

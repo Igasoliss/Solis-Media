@@ -1,0 +1,120 @@
+{
+ "id": "matrona",
+ "rubro": "Matrona",
+ "gente": "pacientes_f",
+ "slotStep": 15,
+ "business": {
+  "name": "Matrona Katerin San Martín",
+  "tagline": "Salud sexual, ginecología y anticoncepción",
+  "servicesTitle": "¿Qué atención necesitas?",
+  "address": "Centro de Concepción",
+  "phone": "",
+  "ink": "#8E1F4A",
+  "accent": "#F7C3D3",
+  "bg": "#FFF6F8",
+  "whatsapp": "56953241997",
+  "instagram": "",
+  "website": "",
+  "photo_file": "katerin.jpg"
+ },
+ "services": [
+  {
+   "id": "pap",
+   "name": "Toma de PAP",
+   "duration": 20,
+   "price": "$18.000",
+   "description": "Desde los 25 años o al año de iniciar actividad sexual."
+  },
+  {
+   "id": "vph",
+   "name": "Test de VPH",
+   "duration": 20,
+   "price": "Consultar",
+   "description": "Detección del virus papiloma humano."
+  },
+  {
+   "id": "anticoncepcion",
+   "name": "Consulta de anticoncepción",
+   "duration": 40,
+   "price": "$25.000",
+   "description": "Te ayudo a elegir tu método y hacemos su control."
+  },
+  {
+   "id": "implante",
+   "name": "Inserción de implante",
+   "duration": 60,
+   "price": "Consultar",
+   "description": "Incluye consejería previa."
+  },
+  {
+   "id": "gineco",
+   "name": "Control ginecológico",
+   "duration": 40,
+   "price": "$25.000",
+   "description": "Control integral y revisión de exámenes."
+  },
+  {
+   "id": "embarazo",
+   "name": "Control prenatal",
+   "duration": 40,
+   "price": "Consultar",
+   "description": "Acompañamiento durante tu embarazo."
+  }
+ ],
+ "hours": {
+  "0": [],
+  "1": [
+   [
+    "09:00",
+    "19:00"
+   ]
+  ],
+  "2": [
+   [
+    "09:00",
+    "19:00"
+   ]
+  ],
+  "3": [
+   [
+    "09:00",
+    "19:00"
+   ]
+  ],
+  "4": [
+   [
+    "09:00",
+    "19:00"
+   ]
+  ],
+  "5": [
+   [
+    "09:00",
+    "19:00"
+   ]
+  ],
+  "6": [
+   [
+    "09:00",
+    "13:00"
+   ]
+  ]
+ },
+ "names": [
+  "Javiera M.",
+  "Constanza R.",
+  "Catalina S.",
+  "Fernanda P.",
+  "Valentina G.",
+  "Antonia L."
+ ],
+ "reviews": [
+  "Súper cercana, me explicó todo con mucha paciencia.",
+  "Me sentí muy cómoda y escuchada.",
+  "Muy profesional y puntual. La recomiendo.",
+  "Me resolvió todas mis dudas sobre anticoncepción.",
+  "Atención muy humana, volveré a mi control.",
+  "Reservar online fue rapidísimo."
+ ],
+ "density": 0.22
+}
