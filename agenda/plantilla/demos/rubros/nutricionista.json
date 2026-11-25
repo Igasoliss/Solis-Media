@@ -1,0 +1,112 @@
+{
+ "id": "nutricionista",
+ "rubro": "Nutricionista",
+ "gente": "pacientes",
+ "slotStep": 15,
+ "business": {
+  "name": "Nut. Ignacia Soto",
+  "tagline": "Nutrición clínica y deportiva",
+  "servicesTitle": "¿Qué atención necesitas?",
+  "address": "Centro de Concepción · y online",
+  "phone": "",
+  "ink": "#2F5233",
+  "accent": "#F2D16B",
+  "bg": "#FAF8EF",
+  "whatsapp": "56953241997",
+  "instagram": "",
+  "website": ""
+ },
+ "services": [
+  {
+   "id": "primera",
+   "name": "Primera consulta",
+   "duration": 60,
+   "price": "$30.000",
+   "description": "Evaluación, bioimpedancia y pauta personalizada."
+  },
+  {
+   "id": "control",
+   "name": "Control nutricional",
+   "duration": 30,
+   "price": "$20.000",
+   "description": "Seguimiento y ajuste de pauta."
+  },
+  {
+   "id": "deportiva",
+   "name": "Nutrición deportiva",
+   "duration": 60,
+   "price": "$35.000",
+   "description": "Según tu deporte y objetivos."
+  },
+  {
+   "id": "online",
+   "name": "Consulta online",
+   "duration": 45,
+   "price": "$25.000",
+   "description": "Por videollamada."
+  },
+  {
+   "id": "plan",
+   "name": "Plan mensual",
+   "duration": 30,
+   "price": "Consultar",
+   "description": "Controles cada 15 días con seguimiento por WhatsApp."
+  }
+ ],
+ "hours": {
+  "0": [],
+  "1": [
+   [
+    "09:00",
+    "19:00"
+   ]
+  ],
+  "2": [
+   [
+    "09:00",
+    "19:00"
+   ]
+  ],
+  "3": [
+   [
+    "09:00",
+    "19:00"
+   ]
+  ],
+  "4": [
+   [
+    "09:00",
+    "19:00"
+   ]
+  ],
+  "5": [
+   [
+    "09:00",
+    "19:00"
+   ]
+  ],
+  "6": [
+   [
+    "09:00",
+    "13:00"
+   ]
+  ]
+ },
+ "names": [
+  "Francisca O.",
+  "Ignacio B.",
+  "Paula C.",
+  "Martín K.",
+  "Catalina S.",
+  "Gabriel U."
+ ],
+ "reviews": [
+  "Pauta realista, sin pasar hambre.",
+  "Bajé 6 kilos en tres meses.",
+  "Muy motivadora y cercana.",
+  "Me armó la pauta según mis turnos.",
+  "El control online es muy práctico.",
+  "Súper clara con todo."
+ ],
+ "density": 0.22
+}

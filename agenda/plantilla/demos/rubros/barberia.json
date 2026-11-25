@@ -1,0 +1,119 @@
+{
+ "id": "barberia",
+ "rubro": "Barbería",
+ "gente": "clientes",
+ "slotStep": 15,
+ "business": {
+  "name": "Barbería El Puerto",
+  "tagline": "Cortes clásicos y modernos · Barba con toalla caliente",
+  "servicesTitle": "¿Qué te hacemos hoy?",
+  "address": "Centro de Concepción",
+  "phone": "",
+  "ink": "#1F1B18",
+  "accent": "#E8B04B",
+  "bg": "#F3EEE7",
+  "whatsapp": "56953241997",
+  "instagram": "",
+  "website": ""
+ },
+ "services": [
+  {
+   "id": "corte",
+   "name": "Corte de pelo",
+   "duration": 30,
+   "price": "$12.000",
+   "description": "Tijera o máquina, con lavado y peinado."
+  },
+  {
+   "id": "corte-barba",
+   "name": "Corte + barba",
+   "duration": 60,
+   "price": "$18.000",
+   "description": "Corte completo y perfilado de barba con toalla caliente."
+  },
+  {
+   "id": "barba",
+   "name": "Perfilado de barba",
+   "duration": 30,
+   "price": "$8.000",
+   "description": "Navaja, toalla caliente y aceite."
+  },
+  {
+   "id": "nino",
+   "name": "Corte niño",
+   "duration": 30,
+   "price": "$9.000",
+   "description": "Hasta 12 años."
+  },
+  {
+   "id": "fade",
+   "name": "Degradado (fade)",
+   "duration": 45,
+   "price": "$14.000",
+   "description": "Skin fade, low o mid, con diseño simple."
+  },
+  {
+   "id": "color",
+   "name": "Color o visos",
+   "duration": 60,
+   "price": "Consultar",
+   "description": "Depende del largo y del tono que busques."
+  }
+ ],
+ "hours": {
+  "0": [],
+  "1": [
+   [
+    "10:00",
+    "20:00"
+   ]
+  ],
+  "2": [
+   [
+    "10:00",
+    "20:00"
+   ]
+  ],
+  "3": [
+   [
+    "10:00",
+    "20:00"
+   ]
+  ],
+  "4": [
+   [
+    "10:00",
+    "20:00"
+   ]
+  ],
+  "5": [
+   [
+    "10:00",
+    "20:00"
+   ]
+  ],
+  "6": [
+   [
+    "10:00",
+    "15:00"
+   ]
+  ]
+ },
+ "names": [
+  "Matías R.",
+  "Benjamín S.",
+  "Tomás G.",
+  "Vicente P.",
+  "Joaquín L.",
+  "Diego M."
+ ],
+ "reviews": [
+  "El mejor fade que me han hecho, súper detallista.",
+  "Buena onda y puntuales. Ya es mi barbería.",
+  "La barba con toalla caliente es otro nivel.",
+  "Reservé en un minuto y no tuve que esperar nada.",
+  "Le cortaron a mi hijo con harta paciencia.",
+  "Muy buen ambiente y buen precio."
+ ],
+ "density": 0.22
+}

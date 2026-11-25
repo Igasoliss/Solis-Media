@@ -1,0 +1,112 @@
+{
+ "id": "podologa",
+ "rubro": "Podóloga",
+ "gente": "pacientes",
+ "slotStep": 15,
+ "business": {
+  "name": "Podóloga Carolina Vera",
+  "tagline": "Podología clínica y pie diabético",
+  "servicesTitle": "¿Qué atención necesitas?",
+  "address": "Centro de Concepción",
+  "phone": "",
+  "ink": "#264653",
+  "accent": "#F4A261",
+  "bg": "#FBF7F3",
+  "whatsapp": "56953241997",
+  "instagram": "",
+  "website": ""
+ },
+ "services": [
+  {
+   "id": "atencion",
+   "name": "Atención podológica completa",
+   "duration": 60,
+   "price": "$20.000",
+   "description": "Corte, limado, callosidades y masaje."
+  },
+  {
+   "id": "encarnada",
+   "name": "Uña encarnada",
+   "duration": 45,
+   "price": "$18.000",
+   "description": "Tratamiento sin dolor."
+  },
+  {
+   "id": "diabetico",
+   "name": "Pie diabético",
+   "duration": 60,
+   "price": "$22.000",
+   "description": "Atención con cuidados especiales."
+  },
+  {
+   "id": "hongos",
+   "name": "Tratamiento de hongos",
+   "duration": 30,
+   "price": "Consultar",
+   "description": "Según evaluación."
+  },
+  {
+   "id": "domicilio",
+   "name": "Atención a domicilio",
+   "duration": 75,
+   "price": "Consultar",
+   "description": "Según comuna."
+  }
+ ],
+ "hours": {
+  "0": [],
+  "1": [
+   [
+    "09:00",
+    "18:00"
+   ]
+  ],
+  "2": [
+   [
+    "09:00",
+    "18:00"
+   ]
+  ],
+  "3": [
+   [
+    "09:00",
+    "18:00"
+   ]
+  ],
+  "4": [
+   [
+    "09:00",
+    "18:00"
+   ]
+  ],
+  "5": [
+   [
+    "09:00",
+    "18:00"
+   ]
+  ],
+  "6": [
+   [
+    "09:00",
+    "13:00"
+   ]
+  ]
+ },
+ "names": [
+  "Ana M.",
+  "Hernán P.",
+  "Gloria S.",
+  "Jorge L.",
+  "Verónica R.",
+  "Elena T."
+ ],
+ "reviews": [
+  "Mis pies quedaron como nuevos.",
+  "Muy cuidadosa con mi papá diabético.",
+  "Cero dolor con la uña encarnada.",
+  "Puntual y muy limpia.",
+  "Excelente atención a domicilio.",
+  "Fácil reservar."
+ ],
+ "density": 0.22
+}

@@ -1,0 +1,119 @@
+{
+ "id": "masajes",
+ "rubro": "Masajes y spa",
+ "gente": "clientes",
+ "slotStep": 15,
+ "business": {
+  "name": "Calma Spa",
+  "tagline": "Masajes de relajación y descontracturantes",
+  "servicesTitle": "¿Qué te regalas hoy?",
+  "address": "Centro de Concepción",
+  "phone": "",
+  "ink": "#4A3B2F",
+  "accent": "#E8D5B5",
+  "bg": "#F9F5EF",
+  "whatsapp": "56953241997",
+  "instagram": "",
+  "website": ""
+ },
+ "services": [
+  {
+   "id": "relajacion",
+   "name": "Masaje de relajación",
+   "duration": 60,
+   "price": "$28.000",
+   "description": "Aceites tibios y aromaterapia."
+  },
+  {
+   "id": "descontracturante",
+   "name": "Masaje descontracturante",
+   "duration": 60,
+   "price": "$30.000",
+   "description": "Espalda, cuello y hombros."
+  },
+  {
+   "id": "piedras",
+   "name": "Piedras calientes",
+   "duration": 75,
+   "price": "$35.000",
+   "description": "Relajación profunda."
+  },
+  {
+   "id": "facial",
+   "name": "Limpieza facial",
+   "duration": 60,
+   "price": "$25.000",
+   "description": "Limpieza, extracción e hidratación."
+  },
+  {
+   "id": "parejas",
+   "name": "Masaje en pareja",
+   "duration": 60,
+   "price": "Consultar",
+   "description": "En la misma sala, dos terapeutas."
+  },
+  {
+   "id": "giftcard",
+   "name": "Gift card",
+   "duration": 15,
+   "price": "Consultar",
+   "description": "Para regalar cualquier servicio."
+  }
+ ],
+ "hours": {
+  "0": [],
+  "1": [
+   [
+    "10:00",
+    "20:00"
+   ]
+  ],
+  "2": [
+   [
+    "10:00",
+    "20:00"
+   ]
+  ],
+  "3": [
+   [
+    "10:00",
+    "20:00"
+   ]
+  ],
+  "4": [
+   [
+    "10:00",
+    "20:00"
+   ]
+  ],
+  "5": [
+   [
+    "10:00",
+    "20:00"
+   ]
+  ],
+  "6": [
+   [
+    "10:00",
+    "18:00"
+   ]
+  ]
+ },
+ "names": [
+  "Carolina B.",
+  "Rodrigo A.",
+  "Macarena F.",
+  "Felipe N.",
+  "Valentina G.",
+  "Andrea Z."
+ ],
+ "reviews": [
+  "Salí flotando, el mejor masaje que he tenido.",
+  "Lugar precioso y muy tranquilo.",
+  "Las piedras calientes son increíbles.",
+  "Regalé una gift card y quedaron felices.",
+  "Muy profesionales.",
+  "Reservar online es comodísimo."
+ ],
+ "density": 0.22
+}

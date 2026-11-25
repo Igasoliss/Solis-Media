@@ -1,0 +1,107 @@
+{
+ "id": "psicologa",
+ "rubro": "Psicóloga",
+ "gente": "pacientes",
+ "slotStep": 15,
+ "business": {
+  "name": "Ps. Camila Herrera",
+  "tagline": "Psicoterapia para adolescentes y adultos",
+  "servicesTitle": "¿Cómo te puedo acompañar?",
+  "address": "Centro de Concepción · y online",
+  "phone": "",
+  "ink": "#3E4A3D",
+  "accent": "#CFE3B8",
+  "bg": "#F7F8F2",
+  "whatsapp": "56953241997",
+  "instagram": "",
+  "website": ""
+ },
+ "services": [
+  {
+   "id": "primera",
+   "name": "Primera sesión",
+   "duration": 50,
+   "price": "$30.000",
+   "description": "Conversamos qué te trae y cómo podemos trabajar."
+  },
+  {
+   "id": "sesion",
+   "name": "Sesión de psicoterapia",
+   "duration": 50,
+   "price": "$30.000",
+   "description": "Presencial."
+  },
+  {
+   "id": "online",
+   "name": "Sesión online",
+   "duration": 50,
+   "price": "$28.000",
+   "description": "Por videollamada, desde donde estés."
+  },
+  {
+   "id": "pareja",
+   "name": "Terapia de pareja",
+   "duration": 75,
+   "price": "$45.000",
+   "description": "Sesión con ambos."
+  },
+  {
+   "id": "informe",
+   "name": "Informe psicológico",
+   "duration": 30,
+   "price": "Consultar",
+   "description": "Según el tipo de informe que necesites."
+  }
+ ],
+ "hours": {
+  "0": [],
+  "1": [
+   [
+    "10:00",
+    "20:00"
+   ]
+  ],
+  "2": [
+   [
+    "10:00",
+    "20:00"
+   ]
+  ],
+  "3": [
+   [
+    "10:00",
+    "20:00"
+   ]
+  ],
+  "4": [
+   [
+    "10:00",
+    "20:00"
+   ]
+  ],
+  "5": [
+   [
+    "10:00",
+    "20:00"
+   ]
+  ],
+  "6": []
+ },
+ "names": [
+  "Sebastián V.",
+  "Daniela C.",
+  "Josefa T.",
+  "Marcelo I.",
+  "Amanda Q.",
+  "Renata O."
+ ],
+ "reviews": [
+  "Me sentí escuchada desde la primera sesión.",
+  "Las sesiones online funcionan súper bien.",
+  "Muy respetuosa y clara.",
+  "Me ayudó muchísimo con la ansiedad.",
+  "Cercana y profesional.",
+  "Poder agendar sola me sacó un peso."
+ ],
+ "density": 0.22
+}

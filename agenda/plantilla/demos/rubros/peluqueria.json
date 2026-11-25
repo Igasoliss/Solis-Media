@@ -1,0 +1,119 @@
+{
+ "id": "peluqueria",
+ "rubro": "Peluquería",
+ "gente": "clientas",
+ "slotStep": 15,
+ "business": {
+  "name": "Studio Bruma",
+  "tagline": "Peluquería · Color, cortes y tratamientos",
+  "servicesTitle": "¿Qué te gustaría hacerte?",
+  "address": "Centro de Concepción",
+  "phone": "",
+  "ink": "#3B2A3F",
+  "accent": "#E9C6B9",
+  "bg": "#FBF6F2",
+  "whatsapp": "56953241997",
+  "instagram": "",
+  "website": ""
+ },
+ "services": [
+  {
+   "id": "corte",
+   "name": "Corte y brushing",
+   "duration": 60,
+   "price": "$22.000",
+   "description": "Lavado, corte y secado con forma."
+  },
+  {
+   "id": "brushing",
+   "name": "Brushing",
+   "duration": 45,
+   "price": "$15.000",
+   "description": "Lavado y secado liso u ondas."
+  },
+  {
+   "id": "raiz",
+   "name": "Tinte de raíz",
+   "duration": 90,
+   "price": "$35.000",
+   "description": "Retoque de raíz hasta 3 cm."
+  },
+  {
+   "id": "balayage",
+   "name": "Balayage o mechas",
+   "duration": 180,
+   "price": "Consultar",
+   "description": "Depende del largo y del color que tienes hoy."
+  },
+  {
+   "id": "keratina",
+   "name": "Alisado de keratina",
+   "duration": 150,
+   "price": "Consultar",
+   "description": "Te cotizamos según largo y volumen."
+  },
+  {
+   "id": "hidratacion",
+   "name": "Hidratación profunda",
+   "duration": 45,
+   "price": "$18.000",
+   "description": "Tratamiento con ampolla y masaje capilar."
+  }
+ ],
+ "hours": {
+  "0": [],
+  "1": [
+   [
+    "10:00",
+    "19:30"
+   ]
+  ],
+  "2": [
+   [
+    "10:00",
+    "19:30"
+   ]
+  ],
+  "3": [
+   [
+    "10:00",
+    "19:30"
+   ]
+  ],
+  "4": [
+   [
+    "10:00",
+    "19:30"
+   ]
+  ],
+  "5": [
+   [
+    "10:00",
+    "19:30"
+   ]
+  ],
+  "6": [
+   [
+    "10:00",
+    "16:00"
+   ]
+  ]
+ },
+ "names": [
+  "Camila V.",
+  "Francisca O.",
+  "Javiera M.",
+  "Isidora R.",
+  "Antonia L.",
+  "Paula C."
+ ],
+ "reviews": [
+  "Me encantó mi balayage, quedó súper natural.",
+  "Atención cariñosa y el salón precioso.",
+  "Por fin alguien que entiende lo que pido.",
+  "Muy puntuales, reservar online es lo mejor.",
+  "El brushing me duró toda la semana.",
+  "Me asesoraron con el color y quedé feliz."
+ ],
+ "density": 0.22
+}

@@ -1,0 +1,119 @@
+{
+ "id": "unas",
+ "rubro": "Estudio de uñas",
+ "gente": "clientas",
+ "slotStep": 15,
+ "business": {
+  "name": "Nails by Fran",
+  "tagline": "Manicure, pedicure y uñas esculpidas",
+  "servicesTitle": "¿Qué te hacemos hoy?",
+  "address": "Centro de Concepción",
+  "phone": "",
+  "ink": "#6B2346",
+  "accent": "#F7B9C9",
+  "bg": "#FFF5F7",
+  "whatsapp": "56953241997",
+  "instagram": "",
+  "website": ""
+ },
+ "services": [
+  {
+   "id": "permanente",
+   "name": "Esmaltado permanente",
+   "duration": 60,
+   "price": "$15.000",
+   "description": "Manos, con limado y cutículas."
+  },
+  {
+   "id": "acrilicas",
+   "name": "Uñas acrílicas",
+   "duration": 120,
+   "price": "$28.000",
+   "description": "Largo a elección, con esmaltado."
+  },
+  {
+   "id": "polygel",
+   "name": "Polygel",
+   "duration": 105,
+   "price": "$25.000",
+   "description": "Más livianas y naturales."
+  },
+  {
+   "id": "retiro",
+   "name": "Retiro + esmaltado",
+   "duration": 75,
+   "price": "$18.000",
+   "description": "Retiro cuidadoso del material anterior."
+  },
+  {
+   "id": "pedicure",
+   "name": "Pedicure spa",
+   "duration": 60,
+   "price": "$18.000",
+   "description": "Exfoliación, hidratación y esmaltado."
+  },
+  {
+   "id": "nailart",
+   "name": "Nail art",
+   "duration": 30,
+   "price": "Consultar",
+   "description": "Diseños a mano alzada, según la idea que traigas."
+  }
+ ],
+ "hours": {
+  "0": [],
+  "1": [
+   [
+    "10:00",
+    "20:00"
+   ]
+  ],
+  "2": [
+   [
+    "10:00",
+    "20:00"
+   ]
+  ],
+  "3": [
+   [
+    "10:00",
+    "20:00"
+   ]
+  ],
+  "4": [
+   [
+    "10:00",
+    "20:00"
+   ]
+  ],
+  "5": [
+   [
+    "10:00",
+    "20:00"
+   ]
+  ],
+  "6": [
+   [
+    "10:00",
+    "17:00"
+   ]
+  ]
+ },
+ "names": [
+  "Fernanda P.",
+  "Valentina G.",
+  "Catalina S.",
+  "Josefa T.",
+  "Martina A.",
+  "Daniela C."
+ ],
+ "reviews": [
+  "Me duran perfectas tres semanas.",
+  "Fran es una artista con los diseños.",
+  "Súper higiénico y ordenado todo.",
+  "Muy cómodo reservar desde el celular.",
+  "El pedicure spa es un relajo total.",
+  "Puntual y muy detallista, la recomiendo."
+ ],
+ "density": 0.22
+}
