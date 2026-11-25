@@ -1,0 +1,24 @@
+function HoyMin(h){let[a,b]=String(h).split(":");return+a*60+ +b}
+function HoyHM(m){return String(Math.floor(m/60)).padStart(2,"0")+":"+String(m%60).padStart(2,"0")}
+function HoyAhora(){try{let t=new Date().toLocaleTimeString("en-GB",{timeZone:l.config.timezone,hour12:!1,hour:"2-digit",minute:"2-digit"});return HoyMin(t)}catch{return 0}}
+function HoyModTam(){try{return+localStorage.getItem("agenda-modulo")||60}catch{return 60}}
+function HoyModulos(){let c=document.getElementById("modCard"),d=l.day;if(!c||!d||d.date!==l.sel)return;if(l.tab!=="hoy"){c.innerHTML="";return}const M=HoyModTam();
+let bk=d.bookings.filter(b=>b.status!=="cancelled").sort((a,b)=>a.start_min-b.start_min),pas=d.date<d.today,ahora=d.date===d.today?HoyAhora():-1,mods=[];
+for(let [a,b] of d.open||[]){let s=HoyMin(a),e=HoyMin(b),cur=s;let dentro=bk.filter(x=>x.end_min>s&&x.start_min<e);
+ let libre=(x,y)=>{let t=x;while(t<y){let f=Math.min((Math.floor(t/M)+1)*M,y);if(f-t>=15)mods.push({t:"libre",s:t,e:f});t=f}};
+ for(let x of dentro){if(x.start_min>cur)libre(cur,x.start_min);mods.push({t:"ocupado",s:x.start_min,e:x.end_min,b:x});cur=Math.max(cur,x.end_min)}
+ if(cur<e)libre(cur,e)}
+for(let x of bk)if(!mods.some(m=>m.b===x))mods.push({t:"ocupado",s:x.start_min,e:x.end_min,b:x});
+mods.sort((a,b)=>a.s-b.s);
+let nO=mods.filter(m=>m.t==="ocupado").length,nL=mods.filter(m=>m.t==="libre"&&!pas&&m.e>ahora).length;
+if(!mods.length){c.innerHTML="";return}
+let html=mods.map(m=>{let pasado=pas||m.e<=ahora,ahoraEn=!pas&&m.s<=ahora&&ahora<m.e,rango=`${HoyHM(m.s)} – ${HoyHM(m.e)}`;
+ if(m.t==="ocupado")return`<button type="button" class="hmod hmod-oc${pasado?" hmod-pas":""}${ahoraEn?" hmod-now":""}" data-bk="${p(m.b.id)}"><span class="hmod-h">${rango}</span><b>${p(m.b.name||"Reservada")}</b><span class="hmod-s">${p(m.b.service||"")}</span></button>`;
+ return`<button type="button" class="hmod hmod-li${pasado?" hmod-pas":""}${ahoraEn?" hmod-now":""}" data-libre="${HoyHM(m.s)}" ${pasado?"disabled":""}><span class="hmod-h">${rango}</span><b>${pasado?"Sin reservar":"Libre"}</b><span class="hmod-s">${pasado?"":"Toca para agendar"}</span></button>`}).join("");
+c.innerHTML=`<style>.hmods{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}@media(max-width:520px){.hmods{grid-template-columns:1fr 1fr;gap:8px}}.hmod{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:3px;min-height:84px;padding:12px 13px;border-radius:14px;border:1.5px solid #E6DFD8;background:#fff;transition:transform .12s,box-shadow .12s}.hmod:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.06)}.hmod:focus-visible{outline:2px solid var(--accent,#5B2246);outline-offset:2px}.hmod-h{font-size:12.5px;font-weight:600;color:var(--muted);letter-spacing:.2px}.hmod b{font-size:15px;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.hmod-s{font-size:12.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.hmod-li b{color:#8A7F78;font-weight:600}.hmod-oc{background:#E4F5E9;border-color:#9ED4B0}.hmod-oc b{color:#17542D}.hmod-oc .hmod-h,.hmod-oc .hmod-s{color:#3E7A54}.hmod-pas{opacity:.5}.hmod-li.hmod-pas{cursor:default;background:#FAF8F6;border-style:dashed}.hmod-li.hmod-pas:hover{transform:none;box-shadow:none}.hmod-now{box-shadow:0 0 0 3px rgba(91,34,70,.18)}.hleg{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin:0 0 12px}.hleg i{display:inline-block;width:12px;height:12px;border-radius:4px;vertical-align:-1px;margin-right:6px}</style>
+<div class="sec"><h3>Módulos del día · <span style="text-transform:none;font-weight:500"><b>${nO}</b> ${nO===1?"agendado":"agendados"}${pas?"":` · <b>${nL}</b> ${nL===1?"libre":"libres"}`}</span></h3>
+<div class="hleg" style="justify-content:space-between;align-items:center"><span><span style="margin-right:14px"><i style="background:#fff;border:1.5px solid #E6DFD8"></i>Libre</span><span><i style="background:#E4F5E9;border:1.5px solid #9ED4B0"></i>Agendado</span></span><span>Módulos de ${[[30,"30 min"],[60,"1 hora"]].map(([v,t])=>v===M?`<b style="color:var(--ink,#3B1630)">${t}</b>`:`<button class="link" data-mt="${v}">${t}</button>`).join(" · ")}</span></div>
+<div class="hmods">${html}</div></div>`;
+c.querySelectorAll("[data-mt]").forEach(x=>x.onclick=()=>{try{localStorage.setItem("agenda-modulo",x.dataset.mt)}catch{}HoyModulos()});
+c.querySelectorAll("[data-libre]").forEach(x=>x.onclick=()=>ce({date:l.sel,time:x.dataset.libre}));
+c.querySelectorAll("[data-bk]").forEach(x=>x.onclick=()=>{let r=document.querySelector(`#dayCard [data-bkrow="${x.dataset.bk}"]`)||document.getElementById("dayCard");r&&r.scrollIntoView({behavior:"smooth",block:"center"});r&&r.animate&&r.animate([{background:"#E4F5E9"},{background:"transparent"}],{duration:1400})})}
