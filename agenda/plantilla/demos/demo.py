@@ -73,8 +73,7 @@ out = out.replace('.demo-nav a.on{background:#F6BDE0', f'.demo-nav a.on{{backgro
 out = out.replace(' <a href="privacidad.html" target="_blank" rel="noopener" style="color:inherit">Política de privacidad</a>', '')
 out = rep(out, '<p class="foot" id="foot"></p>', '<p class="foot" id="foot"></p>\n  <p class="foot">Agenda de demostración · Desarrollada por <a href="https://solismedia.cl">www.solismedia.cl</a></p>')
 # Foto más grande y nombre con tipografía más sofisticada
-out = rep(out, '<style>:root {', '<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">\n<style>:root {')
-out = rep(out, '</style>', '\n.head .mark{width:78px;height:78px;border-radius:24px;font-size:26px}.head h1{font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:29px;line-height:1.05;letter-spacing:0}.head p{margin-top:4px}\n</style>', 1) if False else out.replace('</style>', '\n.head .mark{width:78px;height:78px;border-radius:24px;font-size:26px}.head h1{font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:29px;line-height:1.05;letter-spacing:0}.head p{margin-top:4px}\n</style>', 1)
+out = out.replace('</style>', '\n.head .mark{width:78px;height:78px;border-radius:24px;font-size:26px}.head p{margin-top:4px}\n</style>', 1)
 # Instagram y web de ejemplo: se ven, pero no llevan a ninguna parte
 out = out.replace('</body>', '<script>document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a.soc");if(a&&!/wa\\.me/.test(a.href))e.preventDefault()},true)</script>\n</body>', 1)
 PLAN = {"plan": {"plan": "agenda", "estado": "prueba", "desde": None, "proximo_cobro": None, "monto": 24990, "link_pago": None, "nota": "Demo: así ves tu suscripción."}}
