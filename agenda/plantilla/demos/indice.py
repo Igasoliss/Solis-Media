@@ -2,7 +2,7 @@
 import json, glob, html, os, sys, base64
 AQUI = os.path.dirname(os.path.abspath(__file__))
 ORDEN = ['barberia', 'peluqueria', 'unas', 'masajes', 'matrona', 'armonizacion-facial', 'kinesiologa',
-         'enfermera', 'medico', 'psicologa', 'nutricionista', 'podologa']
+         'enfermera', 'medico', 'psicologa', 'nutricionista', 'podologa', 'casa-bosque-kids']
 items = [json.load(open(f)) for f in glob.glob(os.path.join(AQUI, 'rubros', '*.json'))]
 items.sort(key=lambda c: ORDEN.index(c['id']) if c['id'] in ORDEN else 99)
 
