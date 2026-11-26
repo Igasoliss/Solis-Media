@@ -74,6 +74,37 @@ out = out.replace(' <a href="privacidad.html" target="_blank" rel="noopener" sty
 out = rep(out, '<p class="foot" id="foot"></p>', '<p class="foot" id="foot"></p>\n  <p class="foot">Agenda de demostración · Desarrollada por <a href="https://solismedia.cl">www.solismedia.cl</a></p>')
 # Foto más grande y nombre con tipografía más sofisticada
 out = out.replace('</style>', '\n.head .mark{width:78px;height:78px;border-radius:24px;font-size:26px}.head p{margin-top:4px}\n</style>', 1)
+# Galería de fotos del lugar (opcional): al lado de la agenda en computador, en fila deslizable en celular
+gal = cfg.get('gallery')
+if gal:
+    import html as H
+    carpeta = os.path.dirname(os.path.abspath(CFG_PATH))
+    def uri(f):
+        tipo = 'webp' if f.endswith('.webp') else 'jpeg'
+        return f'data:image/{tipo};base64,' + base64.b64encode(open(os.path.join(carpeta, f), 'rb').read()).decode()
+    figs = ''.join(f'<button type="button" class="gph" aria-label="Ver foto: {H.escape(p["alt"])}"><img src="{uri(p["file"])}" alt="{H.escape(p["alt"])}" loading="lazy"></button>' for p in gal['photos'])
+    bloque = (f'<aside class="galeria" aria-label="{H.escape(gal["title"])}"><h2>{H.escape(gal["title"])}</h2>'
+              f'<div class="gfotos">{figs}</div>' + (f'<p class="gcred">{H.escape(gal["credit"])}</p>' if gal.get('credit') else '') + '</aside>')
+    out = rep(out, '<div class="socials" id="socials"></div>', '<div class="socials" id="socials"></div>\n  ' + bloque)
+    out = out.replace('</style>', '''
+.galeria{margin:0 0 20px}.galeria h2{font-size:15px;margin:0 0 10px;letter-spacing:.01em}
+.gfotos{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:4px;margin:0 -16px;padding-left:16px;padding-right:16px;scrollbar-width:none}
+.gfotos::-webkit-scrollbar{display:none}
+.gph{flex:none;width:128px;aspect-ratio:9/14;padding:0;border:0;border-radius:18px;overflow:hidden;background:var(--accent);cursor:zoom-in;scroll-snap-align:start;box-shadow:0 6px 18px rgba(0,0,0,.08)}
+.gph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}.gph:hover img{transform:scale(1.04)}
+.gcred{font-size:12.5px;opacity:.65;margin:8px 0 0}
+.gbox{position:fixed;inset:0;z-index:50;background:rgba(10,20,15,.86);display:flex;align-items:center;justify-content:center;padding:20px;cursor:zoom-out}
+.gbox img{max-width:100%;max-height:100%;border-radius:16px}
+@media (min-width:1000px){
+ .wrap{max-width:1000px;display:grid;grid-template-columns:330px minmax(0,580px);column-gap:40px;justify-content:center;align-items:start}
+ .wrap>*{grid-column:2}
+ .wrap>.galeria{grid-column:1;grid-row:1/span 6;position:sticky;top:24px;margin:0}
+ .galeria h2{font-size:17px}
+ .gfotos{display:grid;grid-template-columns:1fr 1fr;overflow:visible;margin:0;padding:0}
+ .gph{width:auto}
+}
+</style>''', 1)
+    out = out.replace('</body>', '<script>document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".gph");if(b){var d=document.createElement("div");d.className="gbox";d.innerHTML="<img alt=\'\'>";d.firstChild.src=b.querySelector("img").src;d.onclick=function(){d.remove()};document.body.appendChild(d)}});document.addEventListener("keydown",function(e){if(e.key==="Escape"){var d=document.querySelector(".gbox");if(d)d.remove()}})</script>\n</body>', 1)
 # Instagram y web de ejemplo: se ven, pero no llevan a ninguna parte
 out = out.replace('</body>', '<script>document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a.soc");if(a&&!/wa\\.me/.test(a.href))e.preventDefault()},true)</script>\n</body>', 1)
 PLAN = {"plan": {"plan": "agenda", "estado": "prueba", "desde": None, "proximo_cobro": None, "monto": 24990, "link_pago": None, "nota": "Demo: así ves tu suscripción."}}
