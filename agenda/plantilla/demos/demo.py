@@ -36,7 +36,7 @@ if foto:
 conf = {
     'business': biz,
     'demoReviewComments': cfg['reviews'], 'demoNames': cfg['names'],
-    'demoKey': 'demo-' + cfg['id'] + '-v1', 'demoDensity': cfg.get('density', .05), 'demoPastDensity': .3,
+    'demoKey': 'demo-' + cfg['id'] + '-v' + str(cfg.get('dataVersion', 1)), 'demoDensity': cfg.get('density', .05), 'demoPastDensity': .3,
     'timezone': 'America/Santiago', 'daysAhead': 30, 'slotStep': cfg.get('slotStep', 15),
     'minNoticeMinutes': 60, 'holdMinutes': 30, 'reminderHoursBefore': 24, 'reviewDelayHours': 3,
     'googleReviewUrl': '', 'services': cfg['services'], 'hours': cfg['hours'],
