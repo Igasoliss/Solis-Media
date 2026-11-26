@@ -24,21 +24,24 @@
    "name": "Visita para conocer la casa",
    "duration": 30,
    "price": "Sin costo",
-   "description": "Recorre los espacios y resolvemos tus dudas antes de reservar."
+   "description": "Recorre los espacios y resolvemos tus dudas antes de reservar.",
+   "photo": "casabosque-fachada.webp"
   },
   {
    "id": "cumple",
    "name": "Cumpleaños infantil",
    "duration": 180,
    "price": "$100.000",
-   "description": "3 horas de casa exclusiva, hasta 25 niños. Incluye mesas, sillas y vajilla."
+   "description": "3 horas de casa exclusiva, hasta 25 niños. Incluye mesas, sillas y vajilla.",
+   "photo": "casabosque-mesas.webp"
   },
   {
    "id": "cumple-anim",
    "name": "Cumpleaños con animación",
    "duration": 180,
    "price": "$140.000",
-   "description": "3 horas con animador, juegos, música y pintacaritas. Hasta 25 niños."
+   "description": "3 horas con animador, juegos, música y pintacaritas. Hasta 25 niños.",
+   "photo": "casabosque-circo.webp"
   },
   {
    "id": "babyshower",
@@ -59,7 +62,8 @@
    "name": "Decoración temática",
    "duration": 60,
    "price": "Consultar",
-   "description": "Globos, mesa de dulces y temática a elección (Stitch, circo, princesas y más). Te enviamos opciones por WhatsApp."
+   "description": "Globos, mesa de dulces y temática a elección (Stitch, circo, princesas y más). Te enviamos opciones por WhatsApp.",
+   "photo": "casabosque-stitch.webp"
   },
   {
    "id": "hora-extra",
