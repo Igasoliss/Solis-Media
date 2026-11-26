@@ -78,6 +78,9 @@ out = rep(out, '<p class="foot" id="foot"></p>', '<p class="foot" id="foot"></p>
 out = out.replace('</style>', '\n.head .mark{width:78px;height:78px;border-radius:24px;font-size:26px}.head p{margin-top:4px}\n</style>', 1)
 out = rep(out, '<button class="svc" data-id="${v(n.id)}">', '<button class="svc${n.photo?" hasimg":""}" data-id="${v(n.id)}">${n.photo?`<img class="svcimg" src="${(window.GFOTO||{})[n.photo]||""}" alt="" loading="lazy">`:""}')
 out = out.replace('</style>', '.svc.hasimg{grid-template-columns:72px 1fr auto;column-gap:14px}.svc .svcimg{grid-row:1/span 2;width:72px;height:72px;border-radius:14px;object-fit:cover;align-self:center;background:var(--accent)}.svc.hasimg .meta{grid-column:2/-1}\n</style>', 1)
+# Si el día elegido de entrada no tiene horas (p. ej. hoy ya lleno), pasar solo al siguiente día con horas
+out = rep(out, 'S.querySelector(".day.sel")?.scrollIntoView({block:"nearest",inline:"nearest"}),$e()}', 'S.querySelector(".day.sel")?.scrollIntoView({block:"nearest",inline:"nearest"}),window.__auto=20,$e()}')
+out = rep(out, "if(!t.length){e.innerHTML='<div class=\"empty\">", "if(!t.length&&window.__auto>0){window.__auto--;let nx=S.querySelector(\".day.sel\")?.nextElementSibling;if(nx){nx.click();nx.scrollIntoView({block:\"nearest\",inline:\"nearest\"});return}}window.__auto=0;if(!t.length){e.innerHTML='<div class=\"empty\">")
 # Galería de fotos del lugar (opcional): al lado de la agenda en computador, en fila deslizable en celular
 gal = cfg.get('gallery')
 if gal:
