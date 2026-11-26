@@ -66,7 +66,7 @@ out = rep(out, sc[2], n2); out = rep(out, sc[3], n3)
 nom = biz['name']
 out = rep(out, '<title>Demo · Agenda online Matrona Eileen Cartes</title>', f'<title>Demo · Agenda online {nom}</title>')
 out = rep(out, "<span>Demo preparada por Solís Media para Matrona Eileen Cartes</span>", f"<span><a href=\"../\" style=\"color:inherit;padding:0;background:none\">‹ Demos</a> · {cfg['rubro']}</span>")
-out = rep(out, '>Panel de Eileen</a>', '>Panel del profesional</a>' if cfg.get('gente') != 'pacientes_f' and cfg.get('gente') != 'clientas' else '>Panel de la profesional</a>')
+out = rep(out, '>Panel de Eileen</a>', '>' + cfg['panel'] + '</a>') if cfg.get('panel') else rep(out, '>Panel de Eileen</a>', '>Panel del profesional</a>' if cfg.get('gente') != 'pacientes_f' and cfg.get('gente') != 'clientas' else '>Panel de la profesional</a>')
 out = rep(out, '>Agenda para pacientes</a>', '>Agenda para ' + {'clientes': 'clientes', 'clientas': 'clientas'}.get(cfg.get('gente'), 'pacientes') + '</a>')
 out = out.replace('background:#4E2145;color:#fff', f'background:{biz["ink"]};color:#fff').replace('color:#4E2145}', f'color:{biz["ink"]}}}')
 out = out.replace('.demo-nav a.on{background:#F6BDE0', f'.demo-nav a.on{{background:{biz["accent"]}')

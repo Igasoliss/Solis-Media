@@ -1,0 +1,121 @@
+{
+ "id": "casa-bosque-kids",
+ "rubro": "Casa de celebraciones",
+ "gente": "clientes",
+ "slotStep": 30,
+ "density": 0.08,
+ "business": {
+  "name": "Casa Bosque Kids",
+  "tagline": "Casa para cumpleaños, celebraciones infantiles y baby shower · Talcahuano",
+  "servicesTitle": "¿Qué quieres celebrar?",
+  "address": "Sector Las Higueras, Talcahuano",
+  "phone": "",
+  "ink": "#1E7A55",
+  "accent": "#F6D06B",
+  "bg": "#FBF7EC",
+  "whatsapp": "56953241997",
+  "instagram": "casabosquekids",
+  "website": "https://solismedia.cl/demos/",
+  "photo_file": "casabosque.jpg"
+ },
+ "services": [
+  {
+   "id": "visita",
+   "name": "Visita para conocer la casa",
+   "duration": 30,
+   "price": "Sin costo",
+   "description": "Recorre los espacios y resolvemos tus dudas antes de reservar."
+  },
+  {
+   "id": "cumple",
+   "name": "Cumpleaños infantil",
+   "duration": 180,
+   "price": "Consultar",
+   "description": "3 horas de casa exclusiva para tu celebración. Valor según cantidad de niños."
+  },
+  {
+   "id": "cumple-anim",
+   "name": "Cumpleaños con animación",
+   "duration": 180,
+   "price": "Consultar",
+   "description": "3 horas con animador, juegos y música."
+  },
+  {
+   "id": "babyshower",
+   "name": "Baby shower o revelación",
+   "duration": 180,
+   "price": "Consultar",
+   "description": "Espacio decorado para tu celebración familiar."
+  },
+  {
+   "id": "semana",
+   "name": "Celebración de semana",
+   "duration": 120,
+   "price": "Consultar",
+   "description": "De martes a viernes, 2 horas. Ideal para cursos y grupos pequeños."
+  },
+  {
+   "id": "hora-extra",
+   "name": "Hora adicional",
+   "duration": 60,
+   "price": "Consultar",
+   "description": "Para extender tu celebración, sujeta a disponibilidad."
+  }
+ ],
+ "hours": {
+  "0": [
+   [
+    "11:00",
+    "21:00"
+   ]
+  ],
+  "1": [],
+  "2": [
+   [
+    "15:00",
+    "21:00"
+   ]
+  ],
+  "3": [
+   [
+    "15:00",
+    "21:00"
+   ]
+  ],
+  "4": [
+   [
+    "15:00",
+    "21:00"
+   ]
+  ],
+  "5": [
+   [
+    "15:00",
+    "21:00"
+   ]
+  ],
+  "6": [
+   [
+    "11:00",
+    "21:00"
+   ]
+  ]
+ },
+ "names": [
+  "Francisca O.",
+  "Rodrigo A.",
+  "Camila V.",
+  "Felipe N.",
+  "Javiera M.",
+  "Paula C."
+ ],
+ "reviews": [
+  "Los niños lo pasaron increíble, la casa es preciosa.",
+  "Todo muy limpio y ordenado, y la atención un siete.",
+  "Reservar en línea fue facilísimo, sin esperar respuesta.",
+  "El baby shower quedó hermoso, súper recomendado.",
+  "Mi hijo todavía habla de su cumpleaños.",
+  "Muy buena ubicación y espacio seguro para los niños."
+ ],
+ "panel": "Panel del negocio"
+}
