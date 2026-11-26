@@ -30,35 +30,42 @@
    "id": "cumple",
    "name": "Cumpleaños infantil",
    "duration": 180,
-   "price": "Consultar",
-   "description": "3 horas de casa exclusiva para tu celebración. Valor según cantidad de niños."
+   "price": "$100.000",
+   "description": "3 horas de casa exclusiva, hasta 25 niños. Incluye mesas, sillas y vajilla."
   },
   {
    "id": "cumple-anim",
    "name": "Cumpleaños con animación",
    "duration": 180,
-   "price": "Consultar",
-   "description": "3 horas con animador, juegos y música."
+   "price": "$140.000",
+   "description": "3 horas con animador, juegos, música y pintacaritas. Hasta 25 niños."
   },
   {
    "id": "babyshower",
    "name": "Baby shower o revelación",
    "duration": 180,
-   "price": "Consultar",
+   "price": "$110.000",
    "description": "Espacio decorado para tu celebración familiar."
   },
   {
    "id": "semana",
    "name": "Celebración de semana",
    "duration": 120,
-   "price": "Consultar",
+   "price": "$70.000",
    "description": "De martes a viernes, 2 horas. Ideal para cursos y grupos pequeños."
+  },
+  {
+   "id": "decoracion",
+   "name": "Decoración temática",
+   "duration": 60,
+   "price": "Consultar",
+   "description": "Globos, mesa de dulces y temática a elección (Stitch, circo, princesas y más). Te enviamos opciones por WhatsApp."
   },
   {
    "id": "hora-extra",
    "name": "Hora adicional",
    "duration": 60,
-   "price": "Consultar",
+   "price": "$25.000",
    "description": "Para extender tu celebración, sujeta a disponibilidad."
   }
  ],
@@ -117,5 +124,27 @@
   "Mi hijo todavía habla de su cumpleaños.",
   "Muy buena ubicación y espacio seguro para los niños."
  ],
- "panel": "Panel del negocio"
+ "panel": "Panel del negocio",
+ "gallery": {
+  "title": "Así es la casa",
+  "credit": "Fotos de @casabosquekids",
+  "photos": [
+   {
+    "file": "casabosque-fachada.webp",
+    "alt": "Entrada de Casa Bosque Kids"
+   },
+   {
+    "file": "casabosque-mesas.webp",
+    "alt": "Salón con mesas listas para la celebración"
+   },
+   {
+    "file": "casabosque-stitch.webp",
+    "alt": "Decoración temática de Stitch"
+   },
+   {
+    "file": "casabosque-circo.webp",
+    "alt": "Decoración temática de circo"
+   }
+  ]
+ }
 }
