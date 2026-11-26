@@ -6,6 +6,8 @@ import re, json, os, sys, base64
 AQUI = os.path.dirname(os.path.abspath(__file__))
 CFG_PATH, SALIDA = sys.argv[1], sys.argv[2]
 cfg = json.load(open(CFG_PATH))
+# Variante de colores opcional: demo.py cfg.json salida.html '{"ink":"#..","accent":"#..","bg":"#.."}'
+if len(sys.argv) > 3: cfg['business'].update(json.loads(sys.argv[3]))
 
 # Reutiliza construir.py tal cual (todas las mejoras de la plantilla) hasta el ensamblado final
 src = open(os.path.join(AQUI, '..', 'construir.py')).read()
@@ -74,6 +76,8 @@ out = out.replace(' <a href="privacidad.html" target="_blank" rel="noopener" sty
 out = rep(out, '<p class="foot" id="foot"></p>', '<p class="foot" id="foot"></p>\n  <p class="foot">Agenda de demostración · Desarrollada por <a href="https://solismedia.cl">www.solismedia.cl</a></p>')
 # Foto más grande y nombre con tipografía más sofisticada
 out = out.replace('</style>', '\n.head .mark{width:78px;height:78px;border-radius:24px;font-size:26px}.head p{margin-top:4px}\n</style>', 1)
+out = rep(out, '<button class="svc" data-id="${v(n.id)}">', '<button class="svc${n.photo?" hasimg":""}" data-id="${v(n.id)}">${n.photo?`<img class="svcimg" src="${(window.GFOTO||{})[n.photo]||""}" alt="" loading="lazy">`:""}')
+out = out.replace('</style>', '.svc.hasimg{grid-template-columns:72px 1fr auto;column-gap:14px}.svc .svcimg{grid-row:1/span 2;width:72px;height:72px;border-radius:14px;object-fit:cover;align-self:center;background:var(--accent)}.svc.hasimg .meta{grid-column:2/-1}\n</style>', 1)
 # Galería de fotos del lugar (opcional): al lado de la agenda en computador, en fila deslizable en celular
 gal = cfg.get('gallery')
 if gal:
@@ -86,6 +90,11 @@ if gal:
     bloque = (f'<aside class="galeria" aria-label="{H.escape(gal["title"])}"><h2>{H.escape(gal["title"])}</h2>'
               f'<div class="gfotos">{figs}</div>' + (f'<p class="gcred">{H.escape(gal["credit"])}</p>' if gal.get('credit') else '') + '</aside>')
     out = rep(out, '<div class="socials" id="socials"></div>', '<div class="socials" id="socials"></div>\n  ' + bloque)
+    # Fotos dentro de cada servicio (campo "photo" del servicio = archivo de la galería)
+    usadas = {sv['photo'] for sv in cfg['services'] if sv.get('photo')}
+    if usadas:
+        mapa = json.dumps({f: uri(f) for f in usadas})
+        out = rep(out, '<script>window.AGENDA_DEMO = true;', '<script>window.GFOTO=' + mapa + ';</script>\n<script>window.AGENDA_DEMO = true;')
     out = out.replace('</style>', '''
 .galeria{margin:0 0 20px}.galeria h2{font-size:15px;margin:0 0 10px;letter-spacing:.01em}
 .gfotos{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:4px;margin:0 -16px;padding-left:16px;padding-right:16px;scrollbar-width:none}
